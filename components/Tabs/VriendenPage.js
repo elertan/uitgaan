@@ -27,7 +27,10 @@ export default class VriendenPage extends React.Component {
                                         width: 35,
                                         backgroundColor: '#121212',
                                         borderRadius: 50,
-                                        marginRight: 10
+                                        marginRight: 10,
+                                        borderColor: '#FF0000',
+                                        borderStyle: 'solid',
+                                        borderWidth: 1.5
                                     }} />
                                     {/* <Image source={} /> */}
                                     <Left>
