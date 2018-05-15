@@ -30,9 +30,9 @@ const styles = StyleSheet.create({
     },
     header: {
         color: '#FFF',
-        fontSize: 41,
-        fontFamily: 'Roboto',
-        marginTop: 100,
+        fontSize: 60,
+        fontFamily: 'Logo',
+        marginTop: 80,
         textAlign: 'center',
     },
     promotionalTextContainer: {
@@ -83,7 +83,7 @@ class Login extends React.Component {
                 :
                 <View style={{flex: 1, justifyContent: 'space-between'}}>
                     <View styles={styles.mainContainer}>
-                        <Text style={styles.header}>UitGAAN!</Text>
+                        <Text style={styles.header}>Uitgaan</Text>
                         <View style={styles.promotionalTextContainer}>
                             <Text style={styles.promotionalText}>Jouw Nachtleven</Text>
                             <Text style={styles.promotionalText}>Verbind met je vrienden, maak nieuwe events aan of bezoek events die je vrienden geven!</Text>
