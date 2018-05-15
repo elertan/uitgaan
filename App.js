@@ -1,20 +1,22 @@
 import React from 'react';
-import Root from './components/Root';
-import DrawerContent from './components/DrawerContent';
-import { StatusBar,Platform } from 'react-native';
-import { 
-    Drawer,
-    Text
+import {
+    Container,
+    Text,
 } from 'native-base';
-import Expo from 'expo';
+import { 
+    StatusBar, 
+    Platform, 
+} from 'react-native';
+import Expo, { AppLoading } from 'expo';
+
+import Root from './components/Root';
 
 export default class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { loading: true };
-    }
+    state = {
+        isLoading: true
+    };
 
-    async componentDidMount() {
+    async _loadAssetsAsync() {
         await Expo.Font.loadAsync({
             Roboto: require("native-base/Fonts/Roboto.ttf"),
             Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
@@ -22,33 +24,23 @@ export default class App extends React.Component {
         if (Platform.OS === 'android') {
             StatusBar.setHidden(true);
         }
-        
-        this.setState({ loading: false });
-    }
-
-    closeDrawer = () => {
-        this.drawer._root.close();
-    }
-
-    openDrawer = () => {
-        this.drawer._root.open();
     }
 
     render() {
-        if (this.state.loading) {
+        if (this.state.isLoading) {
             return (
-                <Text>Laden...</Text>
+                <AppLoading 
+                    startAsync={this._loadAssetsAsync}
+                    onFinish={() => this.setState({ isLoading: false })}
+                    onError={console.warn}
+                />
             );
         }
 
         return (
-            <Drawer 
-                ref={(ref) => { this.drawer = ref; }}
-                content={<DrawerContent />}
-                onClose={this.closerDrawer}
-            >
-                <Root requestOpenDrawer={this.openDrawer} />
-            </Drawer>
+            <Container>
+                <Root />
+            </Container>
         );
     }
 }
