@@ -1,6 +1,7 @@
 import React from 'react';
 import {
     Platform,
+    StatusBar,
 } from 'react-native';
 import {
     AppLoading,

@@ -109,14 +109,14 @@ class Login extends React.Component {
                         <Button
                             style={{flex: 1, height: 75, backgroundColor: 'rgba(46, 46, 46, 0.95)'}}
                             full
-                            onPress={() => alert('test')}
+                            onPress={() => this.props.navigation.navigate('Login')}
                         >
                             <Text style={styles.loginText}>LOG IN</Text>
                         </Button>
                         <Button 
                             style={{flex: 1, height: 75, backgroundColor: 'rgba(8, 96, 255, 0.95)'}}
                             full
-                            onPress={() => alert('test')}
+                            onPress={() => this.props.navigation.navigate('Register')}
                         >
                             <Text style={styles.signUpText}>REGISTREER</Text>
                         </Button>
