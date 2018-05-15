@@ -91,14 +91,14 @@ class Login extends React.Component {
                     </View>
                     <View style={{flexDirection: 'row'}}>
                         <Button
-                            style={{flex: 1, height: 75, backgroundColor: '#2e2e2e'}}
+                            style={{flex: 1, height: 75, backgroundColor: 'rgba(50, 50, 50, 0.7)'}}
                             full
                             onPress={() => alert('test')}
                         >
                             <Text style={styles.loginText}>LOG IN</Text>
                         </Button>
                         <Button 
-                            style={{flex: 1, height: 75}}
+                            style={{flex: 1, height: 75, backgroundColor: 'rgba(100, 150, 255, 0.7)'}}
                             full
                             onPress={() => alert('test')}
                         >
