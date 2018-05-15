@@ -16,7 +16,7 @@ import {
 import {
     Video,
 } from 'expo';
-import DismissKeyboardHOC from '../hocs/DismissKeyboardHOC';
+import Slider from './reusable/Slider';
 
 const styles = StyleSheet.create({
     container: {
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     mainContainer: {
         paddingHorizontal: 20,
         flex: 1,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
     header: {
         color: '#FFF',
@@ -36,6 +36,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     promotionalTextContainer: {
+        // position: 'relative',
+        // bottom: 100
     },
     promotionalText: {
         color: '#DDD',
@@ -52,6 +54,21 @@ const styles = StyleSheet.create({
         fontSize: 18
     }
 });
+
+// const promotionalContent = [
+//     {
+//         header: 'Hallo',
+//         text: 'Registreer om te verbinden met je vrienden, evenementen te bekijken of zelf evenementen te organiseren.',
+//     },
+//     {
+//         header: 'Gezellig',
+//         text: 'Nooit meer een feestje missen',
+//     },
+//     {
+//         header: 'Iets',
+//         text: 'Nog wat',
+//     },
+// ];
 
 class Login extends React.Component {
     state = {
@@ -84,11 +101,10 @@ class Login extends React.Component {
                 <View style={{flex: 1, justifyContent: 'space-between'}}>
                     <View styles={styles.mainContainer}>
                         <Text style={styles.header}>Uitgaan</Text>
-                        <View style={styles.promotionalTextContainer}>
-                            <Text style={styles.promotionalText}>Jouw Nachtleven</Text>
-                            <Text style={styles.promotionalText}>Verbind met je vrienden, maak nieuwe events aan of bezoek events die je vrienden geven!</Text>
-                        </View>
                     </View>
+                    {/* <View style={styles.promotionalTextContainer}>
+                        <Slider items={promotionalContent} />
+                    </View> */}
                     <View style={{flexDirection: 'row'}}>
                         <Button
                             style={{flex: 1, height: 75, backgroundColor: 'rgba(46, 46, 46, 0.95)'}}
@@ -116,4 +132,4 @@ Login.propTypes = {
 
 };
 
-export default DismissKeyboardHOC(Login);
+export default Login;
