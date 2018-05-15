@@ -102,7 +102,7 @@ class Login extends React.Component {
                             full
                             onPress={() => alert('test')}
                         >
-                            <Text style={styles.signUpText}>SIGN UP</Text>
+                            <Text style={styles.signUpText}>REGISTREER</Text>
                         </Button>
                     </View>
                 </View>
