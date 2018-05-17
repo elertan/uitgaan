@@ -59,46 +59,36 @@ const styles = StyleSheet.create({
     slide: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: 'transparent'
-    },
-    slide1: {
-        flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.45)'
+        paddingHorizontal: 20
     },
-    slide2: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.45)'
-    },
-    slide3: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.45)'
-    },
-    text: {
+    slideHeaderText: {
         color: 'white',
-        fontSize: 16
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+    slideText: {
+        marginTop: 10,
+        color: 'white',
+        fontSize: 14,
+        textAlign: 'center'
     }
 });
 
-// const promotionalContent = [
-//     {
-//         header: 'Hallo',
-//         text: 'Registreer om te verbinden met je vrienden, evenementen te bekijken of zelf evenementen te organiseren.',
-//     },
-//     {
-//         header: 'Gezellig',
-//         text: 'Nooit meer een feestje missen',
-//     },
-//     {
-//         header: 'Iets',
-//         text: 'Nog wat',
-//     },
-// ];
+const promotionalContent = [
+    {
+        header: 'Hallo',
+        text: 'Registreer om te verbinden met je vrienden, evenementen te bekijken of zelf evenementen te organiseren.',
+    },
+    {
+        header: 'Gezellig',
+        text: 'Nooit meer een feestje missen',
+    },
+    {
+        header: 'Iets',
+        text: 'Nog wat',
+    },
+];
 
 class Login extends React.Component {
     state = {
@@ -135,17 +125,14 @@ class Login extends React.Component {
                     {/* <View style={styles.promotionalTextContainer}>
                         <Slider items={promotionalContent} />
                     </View> */}
-                    <View style={{flexDirection: 'row'}}>
-                        <Swiper style={styles.wrapper} height={150} horizontal={true} autoplay>
-                        <View style={styles.slide1}>
-                            <Text style={styles.text}>Hello Swiper</Text>
-                        </View>
-                        <View style={styles.slide2}>
-                            <Text style={styles.text}>Beautiful</Text>
-                        </View>
-                        <View style={styles.slide3}>
-                            <Text style={styles.text}>And simple</Text>
-                        </View>
+                    <View style={{flexDirection: 'row', marginTop: 325}}>
+                        <Swiper style={styles.wrapper} height={200} horizontal={true} autoplay autoplayTimeout={5}>
+                        {promotionalContent.map((item, index) => 
+                            <View style={styles.slide} key={index}>
+                                <Text style={styles.slideHeaderText}>{item.header}</Text>
+                                <Text style={styles.slideText}>{item.text}</Text>
+                            </View>
+                        )}
                         </Swiper>
                     </View>
                     <View style={{flexDirection: 'row'}}>
