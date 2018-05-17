@@ -1,24 +1,32 @@
 import React from 'react';
-import { createStackNavigator } from 'react-navigation';
-import Landing from './Landing';
-import Login from './auth/Login';
-import Register from './auth/Register';
+import { 
+    createStackNavigator,
+    TabNavigator,
+} from 'react-navigation';
 
-export const LandingNavigator =  createStackNavigator({
+// Landing
+import LandingScreen from './Landing';
+import LoginScreen from './auth/Login';
+import RegisterScreen from './auth/Register';
+
+// Home
+import HomeScreen from './Home';
+
+export const LandingNavigator = createStackNavigator({
     Landing: {
-        screen: Landing,
+        screen: LandingScreen,
         navigationOptions: {
             header: null,
         }
     },
     Login: {
-        screen: Login,
+        screen: LoginScreen,
         navigationOptions: {
             title: 'Log In'
         }
     },
     Register: {
-        screen: Register,
+        screen: RegisterScreen,
         navigationOptions: {
             title: 'Registreer'
         }
@@ -26,4 +34,10 @@ export const LandingNavigator =  createStackNavigator({
 }, {
     initialRouteName: 'Landing',
     headerMode: 'screen'
+});
+
+export const HomeNavigator = TabNavigator({
+    Home: {
+        screen: HomeScreen
+    },
 });

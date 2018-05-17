@@ -10,15 +10,22 @@ import {
 import AppLoader from './components/utils/AppLoader';
 import {
     LandingNavigator,
+    HomeNavigator,
 } from './components/routes';
 
 export default class App extends React.Component {
+    state = {
+        user: undefined, // aka niet ingelod
+    }
+
     render() {
         return (
             <AppLoader>
-                <Container>
-                    <LandingNavigator />
-                </Container>
+                {this.state.user ?
+                <Home />
+                :    
+                <LandingNavigator />
+                }
             </AppLoader>
         );
     }
