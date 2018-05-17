@@ -26,21 +26,13 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'stretch',
     },
-    mainContainer: {
-        paddingHorizontal: 20,
-        flex: 1,
-        justifyContent: 'space-between',
-    },
     header: {
         color: '#FFF',
         fontSize: 60,
         fontFamily: 'Logo',
         marginTop: 80,
         textAlign: 'center',
-    },
-    promotionalTextContainer: {
-        // position: 'relative',
-        // bottom: 100
+        flex: 1
     },
     promotionalText: {
         color: '#DDD',
@@ -81,22 +73,24 @@ const promotionalContent = [
         text: 'Registreer om te verbinden met je vrienden, evenementen te bekijken of zelf evenementen te organiseren.',
     },
     {
-        header: 'Gezellig',
-        text: 'Nooit meer een feestje missen',
+        header: 'Meet Up!',
+        text: 'Stel een evenement samen zodat je gemakkelijk je vrienden kunt uitnodigen, of neem is een kijkje wat jouw vrienden voor evenmenten hebben georganiseerd.',
     },
     {
-        header: 'Iets',
-        text: 'Nog wat',
+        header: 'Jouw Uitgaan',
+        text: 'Maak je eigen profiel en laat je vrienden zien bij welke evenementen jij bent geweest, of deel gemakkelijk jouw nachtleven!',
     },
 ];
 
-class Login extends React.Component {
+class Landing extends React.Component {
+    playbackObject = undefined;
+
     state = {
         loading: true
     };
 
     _handleVideoRef = async component => {
-        const playbackObject = component;
+        playbackObject = component;
         await playbackObject.loadAsync(require('../assets/videos/background.mp4'));
         await playbackObject.setVolumeAsync(0);
         await playbackObject.setIsLoopingAsync(true);
@@ -114,19 +108,17 @@ class Login extends React.Component {
                     style={StyleSheet.absoluteFill}
                 />
                 {/* Dit geeft een doorzichtige laag over de app */}
-                <View style={[StyleSheet.absoluteFill, { backgroundColor: 'rgba(0,0,0,0.5)' }]} />
+                <View style={[StyleSheet.absoluteFill, { backgroundColor: 'rgba(0,0,0,0.6)' }]} />
                 {this.state.loading ?
                 <View styles={styles.mainContainer}><Text style={{fontSize: 26}}>Laden...</Text></View>
                 :
                 <View style={{flex: 1, justifyContent: 'space-between'}}>
-                    <View styles={styles.mainContainer}>
-                        <Text style={styles.header}>Uitgaan</Text>
-                    </View>
+                    <Text style={styles.header}>Uitgaan</Text>
                     {/* <View style={styles.promotionalTextContainer}>
                         <Slider items={promotionalContent} />
                     </View> */}
-                    <View style={{flexDirection: 'row', marginTop: 325}}>
-                        <Swiper style={styles.wrapper} height={200} horizontal={true} autoplay autoplayTimeout={5}>
+                    <View style={{flexDirection: 'row', }}>
+                        <Swiper style={styles.wrapper} height={200} horizontal={true} autoplay autoplayTimeout={7.5}>
                         {promotionalContent.map((item, index) => 
                             <View style={styles.slide} key={index}>
                                 <Text style={styles.slideHeaderText}>{item.header}</Text>
@@ -158,8 +150,8 @@ class Login extends React.Component {
     }
 }
 
-Login.propTypes = {
+Landing.propTypes = {
 
 };
 
-export default Login;
+export default Landing;

@@ -4,7 +4,7 @@ import Landing from './Landing';
 import Login from './auth/Login';
 import Register from './auth/Register';
 
-export default createStackNavigator({
+export const LandingNavigator =  createStackNavigator({
     Landing: {
         screen: Landing,
         navigationOptions: {

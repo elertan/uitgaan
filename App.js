@@ -8,14 +8,16 @@ import {
     Platform, 
 } from 'react-native';
 import AppLoader from './components/utils/AppLoader';
-import Root from './components/Root';
+import {
+    LandingNavigator,
+} from './components/routes';
 
 export default class App extends React.Component {
     render() {
         return (
             <AppLoader>
                 <Container>
-                    <Root />
+                    <LandingNavigator />
                 </Container>
             </AppLoader>
         );
