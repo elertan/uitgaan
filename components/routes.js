@@ -4,13 +4,17 @@ import {
 } from 'react-navigation';
 import createMaterialBottomTabNavigator from 'react-navigation-material-bottom-tabs/createMaterialBottomTabNavigator';
 
+import { Icon } from 'react-native-elements';
+
 // Landing
 import LandingScreen from './Landing';
 import LoginScreen from './auth/Login';
 import RegisterScreen from './auth/Register';
 
 // Home
-import HomeScreen from './Home';
+import EventsScreen from './Main/Events';
+import ProfileScreen from './Main/Profile';
+import FriendsScreen from './Main/Friends';
 
 export const LandingNavigator = createStackNavigator({
     Landing: {
@@ -37,19 +41,38 @@ export const LandingNavigator = createStackNavigator({
 });
 
 export const HomeNavigator = createMaterialBottomTabNavigator({
-    Home: {
-        screen: HomeScreen,
-        title: 'Evenementen',
-        tabBarColor: '#F44336',
+    Events: {
+        screen: EventsScreen,
+        navigationOptions: {
+            title: 'Evenementen',
+            tabBarColor: '#F44336',
+            tabBarIcon: (state) => <Icon name="event"  />
+        }
     },
-    Home1: {
-        screen: HomeScreen,
-        title: 'Profiel',
-        tabBarColor: '#1c73ff',
+    Profile: {
+        screen: ProfileScreen,
+        navigationOptions: {
+            title: 'Profiel',
+            tabBarColor: '#1c73ff',
+            tabBarIcon: (state) => <Icon name="person" />
+        }
     },
-    Home2: {
-        screen: HomeScreen,
-        title: 'Iets',
-        tabBarColor: '#1cff98',
+    Friends: {
+        screen: FriendsScreen,
+        navigationOptions: {
+            title: 'Vrienden',
+            tabBarColor: '#17d32d',
+            tabBarIcon: (state) => <Icon name="people" />
+        }
     },
+}, {
+    shifting: true,
+    activeTintColor: '#e91e63',
+    labelStyle: {
+        fontSize: 12,
+    },
+    style: {
+        backgroundColor: 'blue',
+    },
+    initialRouteName: 'Profile'
 });

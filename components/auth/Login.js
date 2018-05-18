@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import {
     Container,
-    Content,
+    View,
     Form,
     Item,
     Input,
@@ -45,7 +45,7 @@ class Login extends React.Component {
     render() {
         return (
             <Container>
-                <Content>
+                <View>
                     <Form>
                         <Item style={styles.formItem}>
                             <Input 
@@ -73,7 +73,7 @@ class Login extends React.Component {
                             <Text>Inloggen</Text>
                         </Button>
                     </Form>
-                </Content>
+                </View>
             </Container>
         );
     }
