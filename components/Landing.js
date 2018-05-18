@@ -19,7 +19,6 @@ import {
     Video,
 } from 'expo';
 import Swiper from 'react-native-swiper';
-import Slider from './reusable/Slider';
 
 const styles = StyleSheet.create({
     container: {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
     createStackNavigator,
-    TabNavigator,
+    createBottomTabNavigator,
 } from 'react-navigation';
 
 // Landing
@@ -36,8 +36,6 @@ export const LandingNavigator = createStackNavigator({
     headerMode: 'screen'
 });
 
-export const HomeNavigator = TabNavigator({
-    Home: {
-        screen: HomeScreen
-    },
+export const HomeNavigator = createBottomTabNavigator({
+    Home: HomeScreen 
 });

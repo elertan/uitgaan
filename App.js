@@ -1,32 +1,20 @@
 import React from 'react';
+import Root from './components/Root';
 import {
-    Container,
-    Text,
-} from 'native-base';
-import { 
-    StatusBar, 
-    Platform, 
-} from 'react-native';
-import AppLoader from './components/utils/AppLoader';
-import {
-    LandingNavigator,
-    HomeNavigator,
-} from './components/routes';
+    Provider
+} from 'react-redux';
+import configureStore from './store/configureStore';
 
-export default class App extends React.Component {
-    state = {
-        user: undefined, // aka niet ingelod
-    }
+const store = configureStore();
 
+class App extends React.Component {
     render() {
         return (
-            <AppLoader>
-                {this.state.user ?
-                <Home />
-                :    
-                <LandingNavigator />
-                }
-            </AppLoader>
+            <Provider store={store}>
+                <Root />
+            </Provider>
         );
     }
 }
+
+export default App;

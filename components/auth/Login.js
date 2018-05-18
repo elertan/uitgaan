@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import userActionCreator from '../../store/actionCreators/user';
 import PropTypes from 'prop-types';
 import {
     StyleSheet,
@@ -22,21 +24,22 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class Login extends React.Component {
+class Login extends React.Component {
     state = {
         username: '',
         usernameError: undefined,
         password: '',
         passwordError: undefined,
-        isAttemptingLogin: false,
     };
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.userStore.user !== this.props.userStore.user) {
+            alert('Welcome, ' + nextProps.userStore.user.name);
+        }
+    }
+
     handleLogin = () => {
-        this.setState({isAttemptingLogin: true});
-        setTimeout(() => {
-            alert('Tering slome nep api, hier komt login zooi, voor nu matsen we je');
-            this.setState({isAttemptingLogin: false});
-        }, 2000);
+        this.props.userActions.login(this.state.username, this.state.password);
     }
 
     render() {
@@ -64,7 +67,7 @@ export default class Login extends React.Component {
                             full 
                             primary
                             large
-                            disabled={this.state.isAttemptingLogin || !this.state.username || !this.state.password}
+                            disabled={this.props.userStore.isLoggingIn || !this.state.username || !this.state.password}
                             onPress={this.handleLogin}
                         >
                             <Text>Inloggen</Text>
@@ -75,3 +78,12 @@ export default class Login extends React.Component {
         );
     }
 }
+
+export default connect(
+    (state) => ({
+        userStore: state.user
+    }),
+    (dispatch) => ({
+        userActions: userActionCreator(dispatch)
+    })
+)(Login);
