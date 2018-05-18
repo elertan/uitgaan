@@ -8,26 +8,13 @@ import {
 import { Icon } from 'react-native-elements';
 
 const styles = StyleSheet.create({
-    cardContainer: {
-      flex: 1,
-    },
     container: {
       flex: 1,
     },
     headerContainer: {
       alignItems: 'center',
-    //   backgroundColor: '#FFF',
       marginBottom: 10,
       marginTop: 45,
-    },
-    indicatorTab: {
-      backgroundColor: 'transparent',
-    },
-    scroll: {
-    //   backgroundColor: '#FFF',
-    },
-    sceneContainer: {
-      marginTop: 10,
     },
     socialIcon: {
       marginLeft: 14,
@@ -35,24 +22,6 @@ const styles = StyleSheet.create({
     },
     socialRow: {
       flexDirection: 'row',
-    },
-    tabBar: {
-    //   backgroundColor: '#EEE',
-    },
-    tabContainer: {
-      flex: 1,
-      marginBottom: 12,
-    },
-    tabLabelNumber: {
-      color: 'gray',
-      fontSize: 12.5,
-      textAlign: 'center',
-    },
-    tabLabelText: {
-      color: 'black',
-      fontSize: 22.5,
-      fontWeight: '600',
-      textAlign: 'center',
     },
     userBioRow: {
       marginLeft: 40,
