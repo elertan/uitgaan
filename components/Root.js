@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {
     Container,
+    View,
     Text,
 } from 'native-base';
 import { 
@@ -16,7 +17,21 @@ import {
 import userActionCreator from '../store/actionCreators/user';
 
 class Root extends React.Component {
+    componentDidMount() {
+        this.props.userActions.checkForSavedUser();
+    }
+
     render() {
+        if (!this.props.userStore.hasCheckedForSavedUser) {
+            return (
+                <AppLoader>
+                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                        <Text>Opgeslagen informatie laden...</Text>
+                    </View>
+                </AppLoader>
+            );
+        }
+
         return (
             <AppLoader>
                 {this.props.userStore.user ?
