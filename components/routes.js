@@ -46,7 +46,7 @@ export const HomeNavigator = createMaterialBottomTabNavigator({
         navigationOptions: {
             title: 'Evenementen',
             tabBarColor: '#F44336',
-            tabBarIcon: (state) => <Icon name="event"  />
+            tabBarIcon: (state) => <Icon name="event" color="#FFF" />
         }
     },
     Profile: {
@@ -54,7 +54,7 @@ export const HomeNavigator = createMaterialBottomTabNavigator({
         navigationOptions: {
             title: 'Profiel',
             tabBarColor: '#1c73ff',
-            tabBarIcon: (state) => <Icon name="person" />
+            tabBarIcon: (state) => <Icon name="person" color="#FFF" />
         }
     },
     Friends: {
@@ -62,7 +62,7 @@ export const HomeNavigator = createMaterialBottomTabNavigator({
         navigationOptions: {
             title: 'Vrienden',
             tabBarColor: '#17d32d',
-            tabBarIcon: (state) => <Icon name="people" />
+            tabBarIcon: (state) => <Icon name="people" color="#FFF" />
         }
     },
 }, {

@@ -2,6 +2,7 @@ import {
     LOGIN_USER_REQUEST,
     LOGIN_USER_ERROR,
     LOGIN_USER_SUCCESS,
+    LOGOUT_USER_REQUEST
 } from '../actions/user';
 import apiRequest from '../../apiRequest';
 
@@ -21,6 +22,11 @@ const creator = (dispatch) => ({
             type: LOGIN_USER_ERROR,
         }));
     },
+    logout: () => {
+        dispatch({
+            type: LOGOUT_USER_REQUEST
+        });
+    }
 });
 
 export default creator;

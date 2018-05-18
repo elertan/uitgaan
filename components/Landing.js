@@ -89,12 +89,35 @@ class Landing extends React.Component {
     };
 
     _handleVideoRef = async component => {
-        playbackObject = component;
-        await playbackObject.loadAsync(require('../assets/videos/background.mp4'));
-        await playbackObject.setVolumeAsync(0);
-        await playbackObject.setIsLoopingAsync(true);
-        await playbackObject.playAsync();
+        this.playbackObject = component;
+        if (!this.playbackObject) return;
+
+        await this.playbackObject.loadAsync(require('../assets/videos/background.mp4'));
+        await this.playbackObject.setVolumeAsync(0);
+        await this.playbackObject.setIsLoopingAsync(true);
+        await this.playbackObject.playAsync();
         this.setState({loading: false});
+    }
+
+    componentDidMount() {
+        // Handle playback of the background when the user leaves the screen
+        this._didBlurSubscription = this.props.navigation.addListener('didBlur', async (payload) => {
+            // User left screen
+            await this.playbackObject.pauseAsync();
+        });
+        this._willFocusSubscription = this.props.navigation.addListener('willFocus', async (payload) => {
+            // User is coming to screen
+            await this.playbackObject.playAsync();
+        });
+    }
+
+    async componentWillUnmount() {
+        // Stop video and release
+        await this.playbackObject.stopAsync();
+        await this.playbackObject.unloadAsync();
+        // Clean subscription to prevent memory leaks
+        this._didBlurSubscription.remove();
+        this._willFocusSubscription.remove();
     }
 
     render() {

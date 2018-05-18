@@ -1,5 +1,9 @@
 import React from 'react';
 import {
+    connect
+} from 'react-redux';
+import userActionCreator from '../../store/actionCreators/user';
+import {
     StyleSheet,
     View,
     Text,
@@ -126,11 +130,11 @@ class Profile extends React.Component {
             <List style={styles.listContainer}>
                 <ListItem 
                     title="Log uit"
-                    onPress={() => alert('Log uit')}
+                    onPress={this.props.userActions.logout}
                     containerStyle={styles.listItemContainer}
                     leftIcon={
                         <Icon 
-                            type="entypo"
+                            type="feather"
                             color="#DD4C39"
                             name="log-out"
                             containerStyle={{ marginRight: 10, marginLeft: 5 }}
@@ -151,4 +155,11 @@ class Profile extends React.Component {
     }
 }
 
-export default Profile;
+export default connect(
+    state => ({
+        userStore: state.user
+    }),
+    dispatch => ({
+        userActions: userActionCreator(dispatch)
+    })
+)(Profile);
