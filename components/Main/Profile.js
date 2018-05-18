@@ -5,7 +5,12 @@ import {
     Text,
     Image,
 } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { 
+    Icon,
+    List,
+    ListItem,
+    Avatar,
+} from 'react-native-elements';
 
 const styles = StyleSheet.create({
     container: {
@@ -54,10 +59,18 @@ const styles = StyleSheet.create({
       marginBottom: 12,
       marginTop: 20
     },
+    listContainer: {
+        marginBottom: 0,
+        marginTop: 0,
+        borderTopWidth: 0,
+    },
+    listItemContainer: {
+        borderBottomColor: '#ECECEC',
+    },
 });
 
 class Profile extends React.Component {
-    render() {
+    renderHeader = () => {
         const { avatar, name, bio } = { name: 'Dennis Kievits', bio: 'Software Engineer & CEO, loving React Native!', avatar: 'https://media.licdn.com/dms/image/C4D03AQEVCsFf79VT3Q/profile-displayphoto-shrink_200_200/0?e=1529888400&v=beta&t=xDHogTX88MLFM1Nzn24PYeg50IJ6n4Kj_s4xWTMdRBw' }
         return (
             <View style={styles.headerContainer}>
@@ -65,7 +78,7 @@ class Profile extends React.Component {
                 <Image
                     style={styles.userImage}
                     source={{
-                    uri: avatar,
+                        uri: avatar,
                     }}
                 />
                 <View style={styles.userNameRow}>
@@ -104,6 +117,35 @@ class Profile extends React.Component {
                     />
                 </View>
                 </View>
+            </View>
+        );
+    }
+
+    renderSettings = () => {
+        return (
+            <List style={styles.listContainer}>
+                <ListItem 
+                    title="Log uit"
+                    onPress={() => alert('Log uit')}
+                    containerStyle={styles.listItemContainer}
+                    leftIcon={
+                        <Icon 
+                            type="entypo"
+                            color="#DD4C39"
+                            name="log-out"
+                            containerStyle={{ marginRight: 10, marginLeft: 5 }}
+                        />
+                    }
+                />
+            </List>
+        );
+    }
+
+    render() {
+        return (
+            <View>
+                {this.renderHeader()}
+                {this.renderSettings()}
             </View>
         );
     }
