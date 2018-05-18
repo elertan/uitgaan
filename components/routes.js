@@ -1,8 +1,8 @@
 import React from 'react';
 import { 
     createStackNavigator,
-    createBottomTabNavigator,
 } from 'react-navigation';
+import createMaterialBottomTabNavigator from 'react-navigation-material-bottom-tabs/createMaterialBottomTabNavigator';
 
 // Landing
 import LandingScreen from './Landing';
@@ -36,6 +36,20 @@ export const LandingNavigator = createStackNavigator({
     headerMode: 'screen'
 });
 
-export const HomeNavigator = createBottomTabNavigator({
-    Home: HomeScreen 
+export const HomeNavigator = createMaterialBottomTabNavigator({
+    Home: {
+        screen: HomeScreen,
+        title: 'Evenementen',
+        tabBarColor: '#F44336',
+    },
+    Home1: {
+        screen: HomeScreen,
+        title: 'Profiel',
+        tabBarColor: '#1c73ff',
+    },
+    Home2: {
+        screen: HomeScreen,
+        title: 'Iets',
+        tabBarColor: '#1cff98',
+    },
 });
