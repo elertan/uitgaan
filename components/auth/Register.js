@@ -120,7 +120,17 @@ class Register extends React.Component {
                     </View>
                     <View style={{ marginBottom: 50 }}>
                         <StepIndicator
-                            currentPosition={0}
+                            customStyles={{
+                                separatorFinishedColor: '#1692ff',
+                                separatorUnFinishedColor: '#77bfff',
+                                stepIndicatorUnFinishedColor: '#77bfff',
+                                stepIndicatorFinishedColor: '#1692ff',
+                                stepStrokeCurrentColor: '#1692ff',
+                                stepIndicatorLabelCurrentColor: '#1692ff',
+                                currentStepLabelColor: '#1692ff',
+                                currentStepIndicatorLabelFontSize: 18,
+                            }}
+                            currentPosition={2}
                             labels={['Welkom', 'Profiel', 'Overig', 'Account', 'Klaar!']}
                         />
                     </View>
