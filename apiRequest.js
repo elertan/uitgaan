@@ -6,10 +6,10 @@ import Axios from 'axios';
 // Axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 
-// export default Axios.create({
-//     baseURL: 'https://uitgaan-api.herokuapp.com/'
-// });
-
 export default Axios.create({
-    baseURL: 'http://localhost:3000/api/v1/'
+    baseURL: 'https://uitgaan-api.herokuapp.com/api/v1/'
 });
+
+// export default Axios.create({
+//     baseURL: 'http://localhost:3000/api/v1/'
+// });

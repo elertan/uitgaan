@@ -113,8 +113,12 @@ class Landing extends React.Component {
 
     async componentWillUnmount() {
         // Stop video and release
-        await this.playbackObject.stopAsync();
-        await this.playbackObject.unloadAsync();
+        if (this.playbackObject) {
+            await this.playbackObject.stopAsync();
+        }
+        if (this.playbackObject) {
+            await this.playbackObject.unloadAsync();
+        }
         // Clean subscription to prevent memory leaks
         this._didBlurSubscription.remove();
         this._willFocusSubscription.remove();
