@@ -11,10 +11,9 @@ import {
 } from 'react-native';
 import { 
     Icon,
-    List,
-    ListItem,
     Avatar,
 } from 'react-native-elements';
+import SettingsList from 'react-native-settings-list';
 
 const styles = StyleSheet.create({
     container: {
@@ -71,6 +70,13 @@ const styles = StyleSheet.create({
     listItemContainer: {
         borderBottomColor: '#ECECEC',
     },
+    infoText: {
+        fontSize: 14,
+        color: '#777',
+        fontWeight: '600',
+        marginLeft: 15,
+        marginBottom: -15
+    }
 });
 
 class Profile extends React.Component {
@@ -127,21 +133,39 @@ class Profile extends React.Component {
 
     renderSettings = () => {
         return (
-            <List style={styles.listContainer}>
-                <ListItem 
-                    title="Log uit"
-                    onPress={this.props.userActions.logout}
-                    containerStyle={styles.listItemContainer}
-                    leftIcon={
-                        <Icon 
-                            type="feather"
-                            color="#DD4C39"
-                            name="log-out"
-                            containerStyle={{ marginRight: 10, marginLeft: 5 }}
-                        />
-                    }
-                />
-            </List>
+            <View>
+                <SettingsList borderColor="#AAA">
+                    <SettingsList.Header 
+                        headerText="Account"
+                        headerStyle={{ marginLeft: 15, color: '#333' }}
+                    />
+                    <SettingsList.Item 
+                        title="Wijzig"
+                        icon={
+                            <Icon 
+                                type="material-community"
+                                name="account-edit"
+                                color="#333"
+                                size={28}
+                                containerStyle={{ marginLeft: 15 }}
+                            />
+                        }
+                    />
+                    <SettingsList.Header headerStyle={{ marginTop: 25 }} />
+                    <SettingsList.Item 
+                        title="Log uit"
+                        onPress={this.props.userActions.logout}
+                        icon={
+                            <Icon 
+                                type="feather"
+                                name="log-out"
+                                color="#DD4C39"
+                                containerStyle={{ marginLeft: 15 }}
+                            />
+                        }
+                    />
+                </SettingsList>
+            </View>
         );
     }
 

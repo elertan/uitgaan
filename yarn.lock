@@ -1686,7 +1686,7 @@ core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
-create-react-class@^15.6.3:
+create-react-class@^15.6.2, create-react-class@^15.6.3:
   version "15.6.3"
   resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.3.tgz#2d73237fb3f970ae6ebe011a9e66f46dbca80036"
   dependencies:
@@ -3966,6 +3966,13 @@ react-native-safe-module@^1.1.0:
   resolved "https://registry.yarnpkg.com/react-native-safe-module/-/react-native-safe-module-1.2.0.tgz#a23824ca24edc2901913694a76646475113d570d"
   dependencies:
     dedent "^0.6.0"
+
+react-native-settings-list@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/react-native-settings-list/-/react-native-settings-list-1.8.0.tgz#89089546e84e6fdf3b9e421fe870f0c2626868da"
+  dependencies:
+    create-react-class "^15.6.2"
+    prop-types "^15.5.10"
 
 react-native-svg@6.2.2:
   version "6.2.2"

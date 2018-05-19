@@ -11,6 +11,7 @@
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz",
     "react-native-elements": "^0.19.1",
+    "react-native-settings-list": "^1.8.0",
     "react-native-swiper": "^1.5.13",
     "react-native-vector-icons": "^4.6.0",
     "react-native-video": "^2.0.0",
