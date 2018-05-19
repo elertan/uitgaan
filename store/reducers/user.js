@@ -10,6 +10,7 @@ const initialState = {
     hasCheckedForSavedUser: false,
     user: undefined,
     isLoggingIn: false,
+    loginError: undefined,
 };
 
 const reducer = (state, action) => {
@@ -34,6 +35,7 @@ const reducer = (state, action) => {
         case LOGIN_USER_ERROR: {
             return Object.assign({}, state, {
                 isLoggingIn: false,
+                loginError: action.error
             });
         }
         case LOGOUT_USER_REQUEST: {

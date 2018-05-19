@@ -33,8 +33,8 @@ class Login extends React.Component {
     };
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.userStore.user !== this.props.userStore.user) {
-            alert('Welcome, ' + nextProps.userStore.user.name);
+        if (nextProps.userStore.loginError !== this.props.userStore.loginError) {
+            alert(nextProps.userStore.loginError.message);
         }
     }
 

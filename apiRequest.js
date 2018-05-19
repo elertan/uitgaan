@@ -6,6 +6,10 @@ import Axios from 'axios';
 // Axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 
+// export default Axios.create({
+//     baseURL: 'https://uitgaan-api.herokuapp.com/'
+// });
+
 export default Axios.create({
-    baseURL: 'https://5afe1bf2d0cc5b001479bf09.mockapi.io/api/v1/'
+    baseURL: 'http://localhost:3000/api/v1/'
 });

@@ -7,6 +7,7 @@ import {
 } from '../actions/user';
 import apiRequest from '../../apiRequest';
 import { AsyncStorage } from 'react-native';
+import ApiResult from '../../ApiResult';
 
 const creator = (dispatch) => ({
     checkForSavedUser: () => {
@@ -17,22 +18,28 @@ const creator = (dispatch) => ({
             });
         }).catch(err => console.error(err));
     },
-    login: (username, password) => {
+    login: async (username, password) => {
         dispatch({
             type: LOGIN_USER_REQUEST
         });
-        return apiRequest.post('/user', {
+        const promise = apiRequest.post('/auth/login', {
             username,
             password
-        }).then(async res => {
-            await AsyncStorage.setItem('user', JSON.stringify(res.data));
+        });
+        const response = await promise;
+        ApiResult.fromResponse(response, async data => {
+            const user = data;
+            await AsyncStorage.setItem('user', JSON.stringify(user));
             dispatch({
                 type: LOGIN_USER_SUCCESS,
-                user: res.data
+                user
             });
-        }).catch(err => dispatch({
-            type: LOGIN_USER_ERROR,
-        }));
+        }, err => {
+            dispatch({
+                type: LOGIN_USER_ERROR,
+                error: err
+            });
+        });
     },
     logout: async () => {
         await AsyncStorage.removeItem('user');
