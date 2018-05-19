@@ -4,6 +4,8 @@ import userActionCreator from '../../store/actionCreators/user';
 import PropTypes from 'prop-types';
 import {
     StyleSheet,
+    Keyboard,
+    TouchableWithoutFeedback
 } from 'react-native';
 import {
     Container,
@@ -83,6 +85,7 @@ class Register extends React.Component {
 
     render() {
         return (
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={StyleSheet.absoluteFill}>
             <Container>
                 <Text style={styles.welcomeText}>Welkom aan boord!</Text>
                 <Text style={styles.motivationalText}>Vertel ons een beetje over wie je bent.</Text>
@@ -123,6 +126,7 @@ class Register extends React.Component {
                     </View>
                 </View>
             </Container>
+            </TouchableWithoutFeedback>
         );
     }
 }
