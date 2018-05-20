@@ -62,6 +62,8 @@ export default class Profile extends React.Component {
 
     state = {
         avatar: null,
+        bio: '',
+        validationManager: new ValidationManager()
     };
 
     componentDidMount() {
@@ -91,7 +93,8 @@ export default class Profile extends React.Component {
 
     handleProceed = () => {
         const data = {
-            avatar: this.state.avatar
+            avatar: this.state.avatar,
+            bio: this.state.bio
         };
         this.props.onNext(data);
     };
@@ -122,10 +125,23 @@ export default class Profile extends React.Component {
                 </View>
                 <Text style={styles.motivationalText}>
                 {this.state.avatar ?
-                'Wow! Je gaat snel kerel, ik zag je bijna niet meer staan met die planga 😎!'
+                'Top! Ziet er goed uit.'
                 :
                 'Je kunt hierboven een afbeelding kiezen om op je profiel te tonen, zodat anderen direct zien dat jij het bent!'}
                 </Text>
+                <TextField 
+                    multiline
+                    label="Bio"
+                    title="Vertel wat over jezelf"
+                    characterRestriction={200}
+                    inputContainerStyle={{ height: 150 }}
+                    onBlur={() => this.setState({ validationManager: this.state.validationManager.enableFeedback('bio') })}
+                    error={this.state.validationManager.getError('bio')}
+                    onChangeText={bio => {
+                        if (bio.length > 200) return;
+                        this.setState({ bio, validationManager: this.state.validationManager.setError('bio', () => undefined) });
+                    }}
+                />
                 <View style={styles.progressStepperContainer}>
                     <Button
                         onPress={this.props.onBack}
