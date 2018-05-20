@@ -76,7 +76,7 @@ export default class Account extends React.Component {
         return (
             <View style={styles.inputContainer}>
                 <Text style={styles.welcomeText}>Account</Text>
-                <Text style={styles.motivationalText}>Het laatste wat we willen van je, beloofd.</Text>
+                <Text style={styles.motivationalText}>Het laatste wat we nodig hebben, beloofd.</Text>
                 <TextField 
                     label="Gebruikersnaam"
                     autoCapitalize='none'
@@ -94,7 +94,7 @@ export default class Account extends React.Component {
                     onChangeText={password => this.setState({ password, validationManager: this.state.validationManager.setError('password', validatePassword(password)).setError('passwordAgain', validatePasswordAgain(password, this.state.passwordAgain)) })}
                 />
                 <TextField 
-                    label="Wachtwoord Overnieuw"
+                    label="Wachtwoord Opnieuw"
                     secureTextEntry
                     value={this.state.passwordAgain}
                     onBlur={() => this.setState({ validationManager: this.state.validationManager.enableFeedback('passwordAgain') })}
