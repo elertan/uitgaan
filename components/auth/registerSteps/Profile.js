@@ -64,6 +64,12 @@ export default class Profile extends React.Component {
         avatar: null,
     };
 
+    componentDidMount() {
+        if (this.props.data) {
+            this.setState(this.props.data);
+        }
+    }
+
     handleSelectProfileIcon = async () => {
         const image = await ImagePicker.openPicker({
             cropping: true,

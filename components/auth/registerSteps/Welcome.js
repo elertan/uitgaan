@@ -41,7 +41,8 @@ const styles = StyleSheet.create({
 
 export default class Welcome extends React.Component {
     static propTypes = {
-        onNext: PropTypes.func.isRequired
+        onNext: PropTypes.func.isRequired,
+        data: PropTypes.object
     };
 
     state = {
@@ -49,6 +50,12 @@ export default class Welcome extends React.Component {
         lastname: '',
         validationManager: new ValidationManager(['firstname', 'lastname'])
     };
+
+    componentDidMount() {
+        if (this.props.data) {
+            this.setState(Object.assign(this.props.data, { validationManager: new ValidationManager() }));
+        }
+    }
 
     mayProceed = () => {
         return this.state.validationManager.isValidSubset(['firstname', 'lastname']);

@@ -20,9 +20,13 @@ import moment from 'moment';
 import IndexViewRenderer from '../reusable/IndexViewRenderer';
 import WelcomeStep from './registerSteps/Welcome';
 import ProfileStep from './registerSteps/Profile';
+import AccountStep from './registerSteps/Account';
+import FinishedStep from './registerSteps/Finished';
 
 // const styles = StyleSheet.create({
 // });
+
+const labels = ['Welkom', 'Profiel', 'Account', 'Klaar!'];
 
 class Register extends React.Component {
     state = {
@@ -68,8 +72,23 @@ class Register extends React.Component {
             <Container>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
                     <IndexViewRenderer index={this.state.stepIndex}>
-                        <WelcomeStep onNext={this.handleNext} />
-                        <ProfileStep onNext={this.handleNext} onBack={() => this.setState({ stepIndex: this.state.stepIndex - 1 })} />
+                        <WelcomeStep 
+                            onNext={this.handleNext} 
+                            data={this.state.data} 
+                        />
+                        <ProfileStep 
+                            onNext={this.handleNext} 
+                            onBack={() => this.setState({ stepIndex: this.state.stepIndex - 1 })}
+                            data={this.state.data}
+                        />
+                        <AccountStep 
+                            onNext={this.handleNext}
+                            onBack={() => this.setState({ stepIndex: this.state.stepIndex - 1 })}
+                            data={this.state.data}
+                        />
+                        <FinishedStep
+                            data={this.state.data}
+                        />
                     </IndexViewRenderer>
                     <View style={{ marginBottom: 25 }}>
                         <StepIndicator
@@ -84,7 +103,8 @@ class Register extends React.Component {
                                 currentStepIndicatorLabelFontSize: 18,
                             }}
                             currentPosition={this.state.stepIndex}
-                            labels={['Welkom', 'Profiel', 'Overig', 'Account', 'Klaar!']}
+                            labels={labels}
+                            stepCount={labels.length}
                         />
                     </View>
                 </View>
