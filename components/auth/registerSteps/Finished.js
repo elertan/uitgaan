@@ -1,12 +1,29 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import createUserActions from '../../../store/actionCreators/user';
 import {
-    Text
+    Text,
+    View,
 } from 'native-base';
 
-export default class Finished extends React.Component {
+class Finished extends React.Component {
+    componentDidMount() {
+        setTimeout(() => {
+            this.props.userActions.login('bull11', 'shit11');
+        }, 1500);
+    }
+
     render() {
         return (
-            <Text>Klaar!</Text>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 26 }}>Klaar!</Text>
+            </View>
         );
     }
 }
+
+export default connect(state => ({
+    userStore: state.user
+}), dispatch => ({
+    userActions: createUserActions(dispatch)
+}))(Finished);
