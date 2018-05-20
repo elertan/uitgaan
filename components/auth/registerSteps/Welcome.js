@@ -52,7 +52,9 @@ export default class Welcome extends React.Component {
     };
 
     componentDidMount() {
-        if (this.props.data) {
+        if (this.props.data && 
+            this.props.data.firstname && 
+            this.props.data.lastname) {
             this.setState(Object.assign(this.props.data, { validationManager: new ValidationManager() }));
         }
     }

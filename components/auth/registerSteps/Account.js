@@ -79,6 +79,7 @@ export default class Account extends React.Component {
                 <Text style={styles.motivationalText}>Het laatste wat we willen van je, beloofd.</Text>
                 <TextField 
                     label="Gebruikersnaam"
+                    autoCapitalize='none'
                     value={this.state.username}
                     onBlur={() => this.setState({ validationManager: this.state.validationManager.enableFeedback('username') })}
                     error={this.state.validationManager.getError('username')}
@@ -90,7 +91,7 @@ export default class Account extends React.Component {
                     value={this.state.password}
                     onBlur={() => this.setState({ validationManager: this.state.validationManager.enableFeedback('password') })}
                     error={this.state.validationManager.getError('password')}
-                    onChangeText={password => this.setState({ password, validationManager: this.state.validationManager.setError('password', validatePassword(password)) })}
+                    onChangeText={password => this.setState({ password, validationManager: this.state.validationManager.setError('password', validatePassword(password)).setError('passwordAgain', validatePasswordAgain(password, this.state.passwordAgain)) })}
                 />
                 <TextField 
                     label="Wachtwoord Overnieuw"
