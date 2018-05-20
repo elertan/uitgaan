@@ -72,20 +72,20 @@ class Register extends React.Component {
             <Container>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
                     <IndexViewRenderer index={this.state.stepIndex}>
-                        <WelcomeStep 
+                        {/* <WelcomeStep 
                             onNext={this.handleNext} 
                             data={this.state.data} 
-                        />
+                        /> */}
                         <ProfileStep 
                             onNext={this.handleNext} 
                             onBack={() => this.setState({ stepIndex: this.state.stepIndex - 1 })}
                             data={this.state.data}
                         />
-                        <AccountStep 
+                        {/* <AccountStep 
                             onNext={this.handleNext}
                             onBack={() => this.setState({ stepIndex: this.state.stepIndex - 1 })}
                             data={this.state.data}
-                        />
+                        /> */}
                         <FinishedStep
                             data={this.state.data}
                         />
