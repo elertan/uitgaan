@@ -66,6 +66,8 @@ class Register extends React.Component {
         });
     }
 
+    handleBack = () => this.setState({ stepIndex: this.state.stepIndex - 1 });
+
     render() {
         return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={StyleSheet.absoluteFill}>
@@ -78,15 +80,16 @@ class Register extends React.Component {
                         />
                         <ProfileStep 
                             onNext={this.handleNext} 
-                            onBack={() => this.setState({ stepIndex: this.state.stepIndex - 1 })}
+                            onBack={this.handleBack}
                             data={this.state.data}
                         />
                         <AccountStep 
                             onNext={this.handleNext}
-                            onBack={() => this.setState({ stepIndex: this.state.stepIndex - 1 })}
+                            onBack={this.handleBack}
                             data={this.state.data}
                         />
                         <FinishedStep
+                            onBack={this.handleBack}
                             data={this.state.data}
                         />
                     </IndexViewRenderer>

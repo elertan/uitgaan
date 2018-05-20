@@ -81,21 +81,20 @@ const styles = StyleSheet.create({
 
 class Profile extends React.Component {
     renderHeader = () => {
-        const { avatar, name, bio } = { name: 'Dennis Kievits', bio: 'Software Engineer & CEO, loving React Native!', avatar: 'https://media.licdn.com/dms/image/C4D03AQEVCsFf79VT3Q/profile-displayphoto-shrink_200_200/0?e=1529888400&v=beta&t=xDHogTX88MLFM1Nzn24PYeg50IJ6n4Kj_s4xWTMdRBw' }
         return (
             <View style={styles.headerContainer}>
                 <View style={styles.userRow}>
                 <Image
                     style={styles.userImage}
                     source={{
-                        uri: avatar,
+                        uri: this.props.userStore.user.avatar,
                     }}
                 />
                 <View style={styles.userNameRow}>
-                    <Text style={styles.userNameText}>{name}</Text>
+                    <Text style={styles.userNameText}>{this.props.userStore.user.firstname} {this.props.userStore.user.lastname}</Text>
                 </View>
                 <View style={styles.userBioRow}>
-                    <Text style={styles.userBioText}>{bio}</Text>
+                    <Text style={styles.userBioText}>{this.props.userStore.user.bio}</Text>
                 </View>
                 </View>
                 <View style={styles.socialRow}>

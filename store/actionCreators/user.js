@@ -1,8 +1,12 @@
 import {
+    SET_USER,
     CHECK_FOR_SAVED_USER,
     LOGIN_USER_REQUEST,
     LOGIN_USER_ERROR,
     LOGIN_USER_SUCCESS,
+    REGISTER_USER_ERROR,
+    REGISTER_USER_REQUEST,
+    REGISTER_USER_SUCCESS,
     LOGOUT_USER_REQUEST
 } from '../actions/user';
 import apiRequest from '../../apiRequest';
@@ -10,6 +14,13 @@ import { AsyncStorage } from 'react-native';
 import ApiResult from '../../ApiResult';
 
 const creator = (dispatch) => ({
+    setUser: async (user) => {
+        await AsyncStorage.setItem('user', JSON.stringify(user));
+        dispatch({
+            type: SET_USER,
+            user
+        });
+    },
     checkForSavedUser: () => {
         return AsyncStorage.getItem('user').then(data => {
             dispatch({
@@ -46,6 +57,39 @@ const creator = (dispatch) => ({
         dispatch({
             type: LOGOUT_USER_REQUEST
         });
+    },
+    register: async (username, password, firstname, lastname, bio, avatar) => {
+        dispatch({
+            type: REGISTER_USER_REQUEST
+        });
+        try {
+            const response = await apiRequest.post('/auth/register', {
+                username,
+                password,
+                firstname,
+                lastname,
+                bio,
+                avatar,
+                dateOfBirth: ''
+            });
+            ApiResult.fromResponse(response, data => {
+                dispatch({
+                    type: REGISTER_USER_SUCCESS,
+                    user: data
+                });
+            }, err => {
+                dispatch({
+                    type: REGISTER_USER_ERROR,
+                    err
+                });
+            });
+        } catch (err) {
+            console.log(err);
+            dispatch({
+                type: REGISTER_USER_ERROR,
+                err
+            });
+        }
     }
 });
 

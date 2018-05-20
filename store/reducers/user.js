@@ -1,8 +1,12 @@
 import {
+    SET_USER,
     CHECK_FOR_SAVED_USER,
     LOGIN_USER_REQUEST,
     LOGIN_USER_ERROR,
     LOGIN_USER_SUCCESS,
+    REGISTER_USER_ERROR,
+    REGISTER_USER_REQUEST,
+    REGISTER_USER_SUCCESS,
     LOGOUT_USER_REQUEST
 } from '../actions/user';
 
@@ -11,10 +15,18 @@ const initialState = {
     user: undefined,
     isLoggingIn: false,
     loginError: undefined,
+    isRegistering: false,
+    registerError: undefined,
+    registerUserResult: undefined,
 };
 
 const reducer = (state, action) => {
     switch (action.type) {
+        case SET_USER: {
+            return Object.assign({}, state, {
+                user: action.user
+            });
+        }
         case CHECK_FOR_SAVED_USER: {
             return Object.assign({}, state, {
                 hasCheckedForSavedUser: true,
@@ -41,6 +53,23 @@ const reducer = (state, action) => {
         case LOGOUT_USER_REQUEST: {
             return Object.assign({}, state, {
                 user: undefined
+            });
+        }
+        case REGISTER_USER_ERROR: {
+            return Object.assign({}, state, {
+                registerError: action.err,
+                isRegistering: false
+            });
+        }
+        case REGISTER_USER_REQUEST: {
+            return Object.assign({}, state, {
+                isRegistering: true
+            });
+        }
+        case REGISTER_USER_SUCCESS: {
+            return Object.assign({}, state, {
+                isRegistering: false,
+                registerUserResult: action.user
             });
         }
         default: {

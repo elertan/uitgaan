@@ -20,30 +20,49 @@ class Finished extends React.Component {
         fadeAnim: new Animated.Value(1),
         successAnim: new Animated.Value(0),
         buttonAnim: new Animated.Value(0),
-        isLoading: true
+        isLoading: true,
+    }
+
+    onSuccessAnimation = () => {
+        Animated.timing(this.state.fadeAnim, {
+            toValue: 0,
+            duration: 300,
+            easing: Easing.ease
+        }).start(() => {
+            this.setState({isLoading: false});
+            Animated.timing(this.state.successAnim, {
+                toValue: 1,
+                duration: 2000,
+                easing: Easing.ease
+            }).start(() => {
+                Animated.timing(this.state.buttonAnim, {
+                    toValue: 1, 
+                    duration: 300,
+                    easing: Easing.ease
+                }).start();
+            });
+        });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.userStore.registerUserResult !== nextProps.userStore.registerUserResult) {
+            this.onSuccessAnimation();
+        } else if (this.props.userStore.registerError !== nextProps.userStore.registerError) {
+            alert(nextProps.userStore.registerError.message);
+            this.props.onBack();
+        }
     }
 
     componentDidMount() {
-        setTimeout(() => { 
-            Animated.timing(this.state.fadeAnim, {
-                toValue: 0,
-                duration: 300,
-                easing: Easing.ease
-            }).start(() => {
-                this.setState({isLoading: false});
-                Animated.timing(this.state.successAnim, {
-                    toValue: 1,
-                    duration: 2000,
-                    easing: Easing.ease
-                }).start(() => {
-                    Animated.timing(this.state.buttonAnim, {
-                        toValue: 1, 
-                        duration: 300,
-                        easing: Easing.ease
-                    }).start();
-                });
-            });
-        }, 2500);
+        const d = this.props.data;
+        this.props.userActions.register(
+            d.username,
+            d.password,
+            d.firstname,
+            d.lastname,
+            d.bio,
+            d.avatar
+        );
     }
 
     render() {
@@ -66,6 +85,7 @@ class Finished extends React.Component {
                         style={{ opacity: this.state.buttonAnim, marginTop: 100 }}
                     >
                         <Button
+                            onPress={() => this.props.userActions.setUser(this.props.userStore.registerUserResult)}
                             primary
                             full
                             style={{ marginHorizontal: 20, borderRadius: 5 }}
