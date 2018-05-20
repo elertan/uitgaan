@@ -4,6 +4,7 @@ import {
     StyleSheet,
     View,
     TouchableOpacity,
+    Image,
 } from 'react-native';
 import {
     Button,
@@ -60,19 +61,20 @@ export default class Profile extends React.Component {
     };
 
     state = {
-        firstname: '',
-        lastname: '',
+        avatar: null,
         validationManager: new ValidationManager(['firstname', 'lastname'])
     };
 
     handleSelectProfileIcon = async () => {
         const image = await ImagePicker.openPicker({
+            cropping: true,
             cropperCircleOverlay: true,
             cropperCancelText: 'Annuleer',
             cropperChooseText: 'Dit wordt em!',
             width: 300,
             height: 300,
         });
+        this.setState({ avatar: image });
     }
 
     mayProceed = () => {
@@ -96,11 +98,17 @@ export default class Profile extends React.Component {
                             onPress={this.handleSelectProfileIcon}
                             style={styles.profileIconTouchableOpacity}
                         >
+                            {this.state.avatar ?
+                            <Image
+                                source={this.state.avatar}
+                            />
+                            :    
                             <Icon 
                                 name="add-a-photo"
                                 color="#EEE"
                                 size={35}
                             />
+                            }
                         </TouchableOpacity>
                     </View>
                 </View>

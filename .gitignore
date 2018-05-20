@@ -4,6 +4,9 @@ npm-debug.*
 
 .DS_Store
 
+# Na exp detach
+ios/Pods/
+
 # Created by https://www.gitignore.io/api/reactnative
 
 ### ReactNative ###
