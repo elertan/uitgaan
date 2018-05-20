@@ -14,49 +14,24 @@ import {
     Button,
     Text,
 } from 'native-base';
-import { TextField } from 'react-native-material-textfield';
 import StepIndicator from 'react-native-step-indicator';
 import moment from 'moment';
 
-import {
-    firstname as validateFirstname,
-    lastname as validateLastname
-} from '../../input-validation/common';
-import ValidationManager from '../../input-validation/ValidationManager';
+import IndexViewRenderer from '../reusable/IndexViewRenderer';
+import WelcomeStep from './registerSteps/Welcome';
+import ProfileStep from './registerSteps/Profile';
 
-const styles = StyleSheet.create({
-    inputContainer: {
-        paddingHorizontal: 20,
-    },
-    welcomeText: {
-        fontSize: 26,
-        textAlign: 'center',
-        marginVertical: 20,
-        color: '#111'
-    },
-    motivationalText: {
-        fontFamily: 'Roboto',
-        textAlign: 'center',
-        color: '#555',
-        marginBottom: 15
-    },
-    progressStepperContainer: {
-        marginTop: 20, 
-        flexDirection: 'row', 
-        flex: 1, 
-        justifyContent: 'space-between',
-    }
-});
+// const styles = StyleSheet.create({
+// });
 
 class Register extends React.Component {
     state = {
+        data: {},
+        stepIndex: 0,
         username: '',
         password: '',
         passwordAgain: '',
-        firstname: '',
-        lastname: '',
         dateOfBirth: undefined,
-        validationManager: new ValidationManager(['firstname', 'lastname'])
     };
 
     componentWillReceiveProps(nextProps) {
@@ -69,9 +44,6 @@ class Register extends React.Component {
         // this.props.userActions.login(this.state.username, this.state.password);
     }
 
-    mayProceedWelcome = () => {
-        return this.state.validationManager.isValidSubset(['firstname', 'lastname']);
-    }
 
     maySubmit = () => {
         return (
@@ -83,42 +55,23 @@ class Register extends React.Component {
         );
     }
 
+    handleNext = (data) => {
+        this.setState({
+            data: Object.assign(this.state.data, data),
+            stepIndex: this.state.stepIndex + 1
+        });
+    }
+
     render() {
         return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={StyleSheet.absoluteFill}>
             <Container>
-                <Text style={styles.welcomeText}>Welkom aan boord!</Text>
-                <Text style={styles.motivationalText}>Vertel ons een beetje over wie je bent.</Text>
                 <View style={{ flex: 1, justifyContent: 'space-between' }}>
-                    <View style={styles.inputContainer}>
-                        <TextField 
-                            label="Voornaam"
-                            value={this.state.firstname}
-                            onBlur={() => this.setState({ validationManager: this.state.validationManager.enableFeedback('firstname') })}
-                            error={this.state.validationManager.getError('firstname')}
-                            onChangeText={firstname => this.setState({ firstname, validationManager: this.state.validationManager.setError('firstname', validateFirstname(firstname)) })}
-                        />
-                        <TextField 
-                            label="Achternaam"
-                            value={this.state.lastname}
-                            onBlur={() => this.setState({ validationManager: this.state.validationManager.enableFeedback('lastname') })}
-                            error={this.state.validationManager.getError('lastname')}
-                            onChangeText={lastname => this.setState({ lastname, validationManager: this.state.validationManager.setError('lastname', validateFirstname(lastname)) })}
-                        />
-                        <View style={styles.progressStepperContainer}>
-                            <Button
-                                disabled
-                            >
-                                <Text>Vorige</Text>
-                            </Button>
-                            <Button
-                                disabled={!this.mayProceedWelcome()}
-                            >
-                                <Text>Volgende</Text>
-                            </Button>
-                        </View>
-                    </View>
-                    <View style={{ marginBottom: 50 }}>
+                    <IndexViewRenderer index={this.state.stepIndex}>
+                        <WelcomeStep onNext={this.handleNext} />
+                        <ProfileStep onNext={this.handleNext} onBack={() => this.setState({ stepIndex: this.state.stepIndex - 1 })} />
+                    </IndexViewRenderer>
+                    <View style={{ marginBottom: 25 }}>
                         <StepIndicator
                             customStyles={{
                                 separatorFinishedColor: '#1692ff',
@@ -130,7 +83,7 @@ class Register extends React.Component {
                                 currentStepLabelColor: '#1692ff',
                                 currentStepIndicatorLabelFontSize: 18,
                             }}
-                            currentPosition={2}
+                            currentPosition={this.state.stepIndex}
                             labels={['Welkom', 'Profiel', 'Overig', 'Account', 'Klaar!']}
                         />
                     </View>
