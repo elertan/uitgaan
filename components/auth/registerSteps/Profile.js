@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
     },
     profileIcon: {
         backgroundColor: '#444',
-        width: 100,
-        height: 100,
+        width: 125,
+        height: 125,
         borderRadius: 65,
     },
     profileIconTouchableOpacity: {
@@ -62,7 +62,6 @@ export default class Profile extends React.Component {
 
     state = {
         avatar: null,
-        validationManager: new ValidationManager(['firstname', 'lastname'])
     };
 
     handleSelectProfileIcon = async () => {
@@ -71,20 +70,22 @@ export default class Profile extends React.Component {
             cropperCircleOverlay: true,
             cropperCancelText: 'Annuleer',
             cropperChooseText: 'Dit wordt em!',
-            width: 300,
-            height: 300,
+            cropperToolbarTitle: 'Pak nog ff het mooiste stukje',
+            width: 250,
+            height: 250,
+            writeTempFile: false,
+            includeBase64: true
         });
-        this.setState({ avatar: image });
+        this.setState({ avatar: 'data:' + image.mime + ';base64,' + image.data });
     }
 
     mayProceed = () => {
-        return this.state.validationManager.isValidSubset(['firstname', 'lastname']);
+        return this.state.avatar;
     }
 
     handleProceed = () => {
         const data = {
-            firstname: this.state.firstname,
-            lastname: this.state.lastname
+            avatar: this.state.avatar
         };
         this.props.onNext(data);
     };
@@ -100,19 +101,25 @@ export default class Profile extends React.Component {
                         >
                             {this.state.avatar ?
                             <Image
-                                source={this.state.avatar}
+                                source={{ uri: this.state.avatar }}
+                                style={{width: 125, height: 125, resizeMode: 'stretch', borderRadius: 60}}
                             />
                             :    
                             <Icon 
                                 name="add-a-photo"
                                 color="#EEE"
-                                size={35}
+                                size={40}
                             />
                             }
                         </TouchableOpacity>
                     </View>
                 </View>
-                <Text style={styles.motivationalText}>Je kunt hierboven een afbeelding kiezen om op je profiel te tonen, zodat anderen direct zien dat jij het bent!</Text>
+                <Text style={styles.motivationalText}>
+                {this.state.avatar ?
+                'Wow! Je gaat snel kerel, ik zag je bijna niet meer staan met die planga 😎!'
+                :
+                'Je kunt hierboven een afbeelding kiezen om op je profiel te tonen, zodat anderen direct zien dat jij het bent!'}
+                </Text>
                 <View style={styles.progressStepperContainer}>
                     <Button
                         onPress={this.props.onBack}
