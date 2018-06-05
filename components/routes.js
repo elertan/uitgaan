@@ -2,6 +2,9 @@ import React from 'react';
 import { 
     createStackNavigator,
 } from 'react-navigation';
+
+import {StyleSheet} from 'react-native';
+import {Button} from 'native-base';
 import createMaterialBottomTabNavigator from 'react-navigation-material-bottom-tabs/createMaterialBottomTabNavigator';
 
 import { Icon } from 'react-native-elements';
@@ -15,6 +18,8 @@ import RegisterScreen from './auth/Register';
 import EventsScreen from './Main/Events';
 import ProfileScreen from './Main/Profile';
 import FriendsScreen from './Main/Friends';
+//Add event
+import newEventScreen from './Main/newEventScreen';
 
 export const LandingNavigator = createStackNavigator({
     Landing: {
@@ -39,10 +44,25 @@ export const LandingNavigator = createStackNavigator({
     initialRouteName: 'Landing',
     headerMode: 'screen'
 });
-
-export const HomeNavigator = createMaterialBottomTabNavigator({
+export const eventsNavigator = createStackNavigator({
     Events: {
         screen: EventsScreen,
+        navigationOptions: {
+            title: 'Evenementen',
+            headerRight: <Icon name='add' onPress={() => this.props.navigation.navigate('newEvent')} />,
+        },
+    },
+    newEvent: {
+        screen: newEventScreen,
+        navigationOptions: {
+            title: 'Nieuw Evenementen',
+            headerLeft: <Icon name={'chevron-left'} onPress={() => this.props.navigate('Events')} />,
+        },
+    },
+});
+export const HomeNavigator = createMaterialBottomTabNavigator({
+    Events: {
+        screen: eventsNavigator,
         navigationOptions: {
             title: 'Evenementen',
             tabBarColor: '#F44336',
@@ -76,3 +96,4 @@ export const HomeNavigator = createMaterialBottomTabNavigator({
     },
     initialRouteName: 'Profile'
 });
+
