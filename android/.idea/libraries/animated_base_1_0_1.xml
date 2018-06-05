@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="animated-base-1.0.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/e2d72a26a34c195e88d14f18d61c33ff380cedf1/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/e2d72a26a34c195e88d14f18d61c33ff380cedf1/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.facebook.fresco/animated-base/1.0.1/912392085b014fb645b53a8a1942378f1c2bab0b/animated-base-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

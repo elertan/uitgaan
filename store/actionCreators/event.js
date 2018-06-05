@@ -15,11 +15,10 @@ const creator = (dispatch) => ({
         const promise = apiRequest.get('/events/all');
         const response = await promise;
         ApiResult.fromResponse(response, async data => {
-            const event = data;
-            await AsyncStorage.setItem('event', JSON.stringify(event));
+            const events = data;
             dispatch({
                 type: GET_EVENTS_SUCCESS,
-                event
+                events
             });
         }, err => {
             dispatch({

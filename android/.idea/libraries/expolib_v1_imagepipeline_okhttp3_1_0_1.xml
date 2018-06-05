@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="expolib_v1-imagepipeline-okhttp3-1.0.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/7036c19704fe926045f21eddb80634bb3468b6fa/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/7036c19704fe926045f21eddb80634bb3468b6fa/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

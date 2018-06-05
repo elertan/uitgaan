@@ -5,7 +5,7 @@ import {
 } from '../actions/event';
 
 const initialState = {
-    event: undefined,
+    events: undefined,
     isGettingEvents: false,
     getEventsError: undefined
 };
@@ -14,7 +14,7 @@ const reducer = (state, action) => {
     switch (action.type) {
         case GET_EVENTS_SUCCESS: {
             return Object.assign({}, state, {
-                event: action.event,
+                events: action.events,
                 isGettingEvents: false
             });
         }
@@ -26,7 +26,6 @@ const reducer = (state, action) => {
         }
         case GET_EVENTS_REQUEST: {
             return Object.assign({}, state, {
-                event: undefined,
                 isGettingEvents: true
             });
         }
