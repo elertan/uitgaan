@@ -20,6 +20,11 @@ import {
 } from 'react-redux';
 
 const styles = StyleSheet.create({
+    noFriendsContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     listItem: {
         paddingVertical: 5
     }
@@ -31,6 +36,14 @@ class Friends extends React.Component {
     }
 
     renderList = () => {
+        if (this.props.userState.getAllSuccess.length === 0) {
+            return (
+                <Container style={styles.noFriendsContainer}>
+                    <Text>Je bent echt een kansloos mannetje</Text>
+                </Container>
+            );
+        }
+
         return (
             <List>
                 {this.props.userState.getAllSuccess.map((user, i) =>
