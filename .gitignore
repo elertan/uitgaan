@@ -3,6 +3,7 @@ node_modules/**/*
 npm-debug.*
 
 .DS_Store
+.idea/
 
 # Na exp detach
 ios/Pods/
