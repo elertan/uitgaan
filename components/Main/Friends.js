@@ -10,12 +10,20 @@ import {
     Right, 
     Thumbnail, 
     Text,
-    Spinner
+    Spinner,
+    View
 } from 'native-base';
+import { StyleSheet } from 'react-native';
 import userActionCreator from '../../store/actionCreators/user';
 import {
     connect
 } from 'react-redux';
+
+const styles = StyleSheet.create({
+    listItem: {
+        paddingVertical: 5
+    }
+});
 
 class Friends extends React.Component {
     componentDidMount() {
@@ -26,17 +34,19 @@ class Friends extends React.Component {
         return (
             <List>
                 {this.props.userState.getAllSuccess.map((user, i) =>
-                <ListItem avatar key={i}>
+                <ListItem avatar key={i} style={styles.listItem}>
                 <Left>
                     <Thumbnail source={{ uri: user.avatar }} />
                 </Left>
                 <Body>
-                    <Text>{user.firstname} {user.lastname}</Text>
-                    <Text note>{user.bio}</Text>
+                    <View>
+                        <Text>{user.firstname} {user.lastname}</Text>
+                        <Text note>{user.bio}</Text>
+                    </View>
                 </Body>
-                <Right>
+                {/* <Right>
                     <Text note>IETS</Text>
-                </Right>
+                </Right> */}
                 </ListItem>
                 )}
             </List>
