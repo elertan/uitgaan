@@ -7,7 +7,10 @@ import {
     REGISTER_USER_ERROR,
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
-    LOGOUT_USER_REQUEST
+    LOGOUT_USER_REQUEST,
+    GET_ALL,
+    GET_ALL_SUCCESS,
+    GET_ALL_ERROR
 } from '../actions/user';
 
 const initialState = {
@@ -18,6 +21,7 @@ const initialState = {
     isRegistering: false,
     registerError: undefined,
     registerUserResult: undefined,
+    getAllUsers: undefined
 };
 
 const reducer = (state, action) => {
@@ -70,6 +74,17 @@ const reducer = (state, action) => {
             return Object.assign({}, state, {
                 isRegistering: false,
                 registerUserResult: action.user
+            });
+        }
+        case GET_ALL_SUCCESS: {
+            console.log(action);
+            return Object.assign({}, state, {
+                getAllSuccess: action.users
+            });
+        }
+        case GET_ALL_ERROR: {
+            return Object.assign({}, state, {
+                getAllError: action.err
             });
         }
         default: {

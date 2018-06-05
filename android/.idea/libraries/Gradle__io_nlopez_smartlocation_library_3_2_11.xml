@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: io.nlopez.smartlocation:library-3.2.11">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/6d049a4fc71c614ef3205efb6eab042da083bf03/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/6d049a4fc71c614ef3205efb6eab042da083bf03/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

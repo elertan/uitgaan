@@ -14,6 +14,7 @@ import {
     Item,
     Input,
     Button,
+    Spinner,
 } from 'native-base';
 import {
     Video,
@@ -136,7 +137,9 @@ class Landing extends React.Component {
                 {/* Dit geeft een doorzichtige laag over de app */}
                 <View style={[StyleSheet.absoluteFill, { backgroundColor: 'rgba(0,0,0,0.6)' }]} />
                 {this.state.loading ?
-                <View styles={styles.mainContainer}><Text style={{fontSize: 26}}>Laden...</Text></View>
+                <View styles={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                    <Spinner color="blue" />
+                </View>
                 :
                 <View style={{flex: 1, justifyContent: 'space-between'}}>
                     <Text style={styles.header}>Uitgaan</Text>

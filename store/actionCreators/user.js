@@ -7,7 +7,10 @@ import {
     REGISTER_USER_ERROR,
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
-    LOGOUT_USER_REQUEST
+    LOGOUT_USER_REQUEST,
+    GET_ALL,
+    GET_ALL_ERROR,
+    GET_ALL_SUCCESS
 } from '../actions/user';
 import apiRequest from '../../apiRequest';
 import { AsyncStorage } from 'react-native';
@@ -87,6 +90,26 @@ const creator = (dispatch) => ({
             console.log(err);
             dispatch({
                 type: REGISTER_USER_ERROR,
+                err
+            });
+        }
+    },
+    getAll: async () => {
+        console.log('getAll');
+        dispatch({
+            type: GET_ALL
+        });
+        try {
+            const response = await apiRequest.get('/user');
+            console.log(response.data);
+            ApiResult.fromResponse(
+                response,
+                data => dispatch({ type: GET_ALL_SUCCESS, users: data }),
+                err => dispatch({ type: GET_ALL_ERROR, err })
+            )
+        } catch (err) {
+            dispatch({
+                type: GET_ALL_ERROR,
                 err
             });
         }
