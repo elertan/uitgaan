@@ -37,10 +37,10 @@ class Events extends React.Component {
                         <View style={{padding: 8}}>
                             <Text style={{fontSize: 20, fontWeight: 'bold'}}>{event.name}</Text>
                             <Text note>{event.description}</Text>
-                            <Badge info>
-                                <Text>€ {event.price / 100}</Text>
-                            </Badge>
                         </View>
+                        <Badge info style={{position: 'absolute', right: 0, margin: 4}}>
+                            <Text>€ {event.price / 100}</Text>
+                        </Badge>
                     </Card>
                 )
               })
