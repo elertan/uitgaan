@@ -95,13 +95,11 @@ const creator = (dispatch) => ({
         }
     },
     getAll: async () => {
-        console.log('getAll');
         dispatch({
             type: GET_ALL
         });
         try {
             const response = await apiRequest.get('/user');
-            console.log(response.data);
             ApiResult.fromResponse(
                 response,
                 data => dispatch({ type: GET_ALL_SUCCESS, users: data }),
