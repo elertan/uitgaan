@@ -77,7 +77,6 @@ const reducer = (state, action) => {
             });
         }
         case GET_ALL_SUCCESS: {
-            console.log(action);
             return Object.assign({}, state, {
                 getAllSuccess: action.users
             });
