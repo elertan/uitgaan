@@ -4,7 +4,7 @@ import {
 } from 'react-navigation';
 
 import {StyleSheet} from 'react-native';
-import {Button} from 'native-base';
+import {Button,View} from 'native-base';
 import createMaterialBottomTabNavigator from 'react-navigation-material-bottom-tabs/createMaterialBottomTabNavigator';
 
 import { Icon } from 'react-native-elements';
@@ -20,6 +20,19 @@ import ProfileScreen from './Main/Profile';
 import FriendsScreen from './Main/Friends';
 //Add event
 import newEventScreen from './Main/newEventScreen';
+
+const styles = StyleSheet.create({
+    topButton:{
+        backgroundColor:'transparent',
+        marginRight:20,
+        
+    },
+    view:{
+        padding:5,
+        marginRight:5,
+        marginLeft: 5,
+    }
+});
 
 export const LandingNavigator = createStackNavigator({
     Landing: {
@@ -47,17 +60,17 @@ export const LandingNavigator = createStackNavigator({
 export const eventsNavigator = createStackNavigator({
     Events: {
         screen: EventsScreen,
-        navigationOptions: {
+        navigationOptions: ({navigation}) => ({
             title: 'Evenementen',
-            headerRight: <Icon name='add' onPress={() => this.props.navigation.navigate('newEvent')} />,
-        },
+            headerRight: <View style={styles.view}><Icon size={28} name='add' style={styles.topButton} onPress={() => navigation.navigate('newEvent')} /></View>,
+        }),
     },
     newEvent: {
         screen: newEventScreen,
-        navigationOptions: {
+        navigationOptions: ({ navigation }) => ( {
             title: 'Nieuw Evenementen',
-            headerLeft: <Icon name={'chevron-left'} onPress={() => this.props.navigate('Events')} />,
-        },
+            headerLeft: <View style={styles.view}><Icon size={28} name={'chevron-left'} onPress={() => navigation.navigate('Events')} /></View>,
+        }),
     },
 });
 export const HomeNavigator = createMaterialBottomTabNavigator({
@@ -94,6 +107,6 @@ export const HomeNavigator = createMaterialBottomTabNavigator({
     style: {
         backgroundColor: 'blue',
     },
-    initialRouteName: 'Profile'
+    initialRouteName: 'Events'
 });
 
