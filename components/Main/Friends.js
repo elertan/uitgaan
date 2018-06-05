@@ -13,7 +13,7 @@ import {
     Spinner,
     View
 } from 'native-base';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, RefreshControl} from 'react-native';
 import userActionCreator from '../../store/actionCreators/user';
 import {
     connect
@@ -31,6 +31,26 @@ const styles = StyleSheet.create({
 });
 
 class Friends extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            refreshing: false,
+        };
+    }
+    _onRefresh() {
+        this.setState({ refreshing: true });
+        this.props.userActions.getAll();
+
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.userState.getAllSuccess !== nextProps.userState.getAllSuccess) {
+            this.setState({ refreshing: false });
+
+        }
+
+    }
     componentDidMount() {
         this.props.userActions.getAll();
     }
@@ -70,7 +90,13 @@ class Friends extends React.Component {
         return (
             <Container>
                 <Header />
-                <Content>
+                <Content refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.refreshing}
+                        onRefresh={this._onRefresh.bind(this)}
+                        title="Refreshing..."
+                    />
+                }>
                     {this.props.userState.getAllSuccess ?
                     this.renderList()
                     :

@@ -1,4 +1,5 @@
 import React from 'react';
+import { RefreshControl} from 'react-native';
 import eventsActions from '../../store/actionCreators/event';
 import { connect } from 'react-redux';
 import {
@@ -13,12 +14,38 @@ import {
 import { Image } from 'react-native';
 
 class Events extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            refreshing: false,
+        };
+    }
+     _onRefresh() {
+        this.setState({ refreshing: true });
+        this.props.eventActions.getEvents();
+        
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(this.props.eventStore.events !== nextProps.eventStore.events){
+            this.setState({ refreshing: false });
+            
+        }
+        
+    }
+
     componentDidMount() {
         this.props.eventActions.getEvents();
     }
     render() {
         return (
-            <Content>
+            <Content refreshControl={
+                <RefreshControl
+                    refreshing={this.state.refreshing}
+                    onRefresh={this._onRefresh.bind(this)}
+                    title="Refreshing..."
+                />
+            }>
                 <List>
                     {this.renderListItem()}
                 </List>
