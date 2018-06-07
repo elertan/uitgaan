@@ -61,8 +61,7 @@ export const eventsNavigator = createStackNavigator({
     Events: {
         screen: EventsScreen,
         navigationOptions: ({navigation}) => ({
-            title: 'Evenementen',
-            headerRight: <View style={styles.view}><Icon size={28} name='add' style={styles.topButton} onPress={() => navigation.navigate('newEvent')} /></View>,
+            header: null
         }),
     },
     newEvent: {
