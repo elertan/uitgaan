@@ -26,6 +26,27 @@ const creator = (dispatch) => ({
                 error: err
             });
         });
+    },
+    getEventsFiltered: async (name) => {
+        dispatch({
+            type: GET_EVENTS_FILTERED_REQUEST
+        });
+        const promise = apiRequest.post('/events/filter', {
+            name
+        });
+        const response = await promise;
+        ApiResult.fromResponse(response, async data => {
+            const events = data;
+            dispatch({
+                type: GET_EVENTS_FILTERED_SUCCESS,
+                events
+            });
+        }, err => {
+            dispatch({
+                type: GET_EVENTS_FILTERED_ERROR,
+                error: err
+            });
+        });
     }
 });
 
