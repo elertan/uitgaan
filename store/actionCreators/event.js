@@ -1,7 +1,10 @@
 import {
     GET_EVENTS_ERROR,
     GET_EVENTS_REQUEST,
-    GET_EVENTS_SUCCESS
+    GET_EVENTS_SUCCESS,
+    GET_EVENTS_FILTERED_ERROR,
+    GET_EVENTS_FILTERED_REQUEST,
+    GET_EVENTS_FILTERED_SUCCESS
 } from '../actions/event';
 import apiRequest from '../../apiRequest';
 import { AsyncStorage } from 'react-native';

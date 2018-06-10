@@ -57,7 +57,7 @@ class Events extends React.Component {
                 }>
                 <Header searchBar rounded style={{backgroundColor: '#F44336'}}>
                     <Left>
-                        <Icon name={'search'} color="#FFF" style={{marginLeft: 4, marginRight: 4}} />
+                        <Icon onPress={this.props.eventActions.getEventsFiltered('Beurs')} name={'search'} color="#FFF" style={{marginLeft: 4, marginRight: 4}} />
                     </Left>
                     <Body style={{flexDirection: 'row', flex: 4, marginLeft: 4}}>
                         <Input style={{backgroundColor: '#ed7971', width: '100%', borderRadius: 10, marginTop: 4, marginBottom: 4}} placeholderTextColor="white" placeholder="Zoek evenementen..." />
