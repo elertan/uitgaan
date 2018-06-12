@@ -10,6 +10,7 @@ import {
     Card,
     Badge,
     List,
+    Spinner,
 } from 'native-base';
 import { Image } from 'react-native';
 
@@ -72,7 +73,7 @@ class Events extends React.Component {
                 )
               })
         } else {
-            return <View><Text>Loading..</Text></View>
+            return <View><Spinner /></View>
         }
     }
 }
