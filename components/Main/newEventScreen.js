@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    StyleSheet,
+    StyleSheet, Image,
 } from 'react-native';
 import {
     Container,
@@ -11,41 +11,84 @@ import {
     Button,
     Content,
     Text,
+    Card,
+    Badge,
+    ListItem,
+    Left,
+    Right,
+    Body,
+    Icon,
 } from 'native-base';
+
+import ImagePicker from 'react-native-image-crop-picker';
 
 
 const styles = StyleSheet.create({
-    formItemFirst:{
+    formItemFirst: {
         marginVertical: 15
     },
     formItem: {
         marginVertical: 15,
-        marginTop:-5,
+        marginTop: -5,
     },
     loginButton: {
         marginTop: 25
     }
 });
 
-export default class newEventScreen extends React.Component{
+export default class newEventScreen extends React.Component {
     state = {
         name: '',
-        nameError: undefined,
         price: '',
-        priceError: undefined,
         discription: '',
-        discriptionError: undefined,
-        displayPreview:'',
+        displayPreview: '',
+        avatar: '',
     };
-
-    renderDisplayPreview(){
-        if(!this.state.name && !this.state.price && !this.state.discription){
-            //return()
+    handleSelectProfileIcon = async () => {
+        try {
+            const image = await ImagePicker.openPicker({
+                cropping: true,
+                cropperCircleOverlay: true,
+                cropperCancelText: 'Annuleer',
+                cropperChooseText: 'Dit wordt em!',
+                cropperToolbarTitle: 'Pak nog ff het mooiste stukje',
+                width: 250,
+                height: 250,
+                writeTempFile: false,
+                includeBase64: true
+            });
+            this.setState({ avatar: 'data:' + image.mime + ';base64,' + image.data });
+        } catch (error) {
+            console.log(error);
         }
-    }
-    render(){
 
-        return(<Content>
+    }
+
+    renderImage(){
+        if(this.state.avatar){
+            return (<Image style={{ width: '100%', height: 200 }} source={{ uri: this.state.avatar }} />);
+        }
+        return (<Image style={{ width: '100%', height: 200 }} source={require('../../assets/images/newEventImageHolder.jpg')} />);
+    }
+
+    renderDisplayPreview() {
+
+        console.log();
+        return (<Card>
+            {this.renderImage()}
+            <View style={{ padding: 8 }}>
+                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{this.state.name}</Text>
+                <Text note>{this.state.discription}</Text>
+            </View>
+            <Badge info style={{ position: 'absolute', right: 0, margin: 4 }}>
+                <Text>€ {this.state.price}</Text>
+            </Badge>
+        </Card>);
+
+    }
+    render() {
+
+        return (<Content>
             <Form>
                 <Item style={styles.formItemFirst}>
                     <Input
@@ -68,8 +111,19 @@ export default class newEventScreen extends React.Component{
                         onChangeText={text => this.setState({ discription: text })}
                     />
                 </Item>
+                <ListItem onPress={this.handleSelectProfileIcon} style={styles.formItem}>
+                    <Body>
+                        <Text>Kies een plaatje</Text>
+                    </Body>
+                    <Right>
+                        <Icon name="arrow-forward" />
+                    </Right>
+                </ListItem>
             </Form>
-
+            <Button block danger style={{ marginHorizontal: 10, marginBottom: 10, backgroundColor:'#F44336'}}>
+                <Text>Plaats evenement</Text>
+            </Button>
+            {this.renderDisplayPreview()}
         </Content>);
     }
 

@@ -56,19 +56,7 @@ class Events extends React.Component {
                         title="Refreshing..."
                     />
                 }>
-                <Header searchBar rounded style={{backgroundColor: '#F44336'}}>
-                    <Left>
-                        <Icon onPress={() => this.props.eventActions.getEventsFiltered('Beurs')} name='search' color="#FFF" style={{marginLeft: 4, marginRight: 4}} />
-                    </Left>
-                    <Body style={{flexDirection: 'row', flex: 4, marginLeft: 4}}>
-                        <Input style={{backgroundColor: '#ed7971', width: '100%', borderRadius: 10, marginTop: 4, marginBottom: 4}} placeholderTextColor="white" placeholder="Zoek evenementen..." />
-                    </Body>
-                    <Right>
-                        <Button transparent>
-                            <Icon size={36} name='add' color="#FFF" style={styles.topButton} onPress={() => this.props.navigation.navigate('newEvent')} />
-                        </Button>
-                    </Right>
-                </Header>
+
                     <List>
                         {this.renderListItem()}
                     </List>

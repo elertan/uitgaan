@@ -4,7 +4,7 @@ import {
 } from 'react-navigation';
 
 import {StyleSheet} from 'react-native';
-import {Button,View} from 'native-base';
+import {Button,View,Input,Text} from 'native-base';
 import createMaterialBottomTabNavigator from 'react-navigation-material-bottom-tabs/createMaterialBottomTabNavigator';
 
 import { Icon } from 'react-native-elements';
@@ -31,7 +31,13 @@ const styles = StyleSheet.create({
         padding:5,
         marginRight:5,
         marginLeft: 5,
-    }
+    },
+    headerSearch:{
+        backgroundColor:'rgba(0,0,0,0.1)',
+        borderRadius:17,
+        paddingLeft:20,
+        paddingRight: 20,
+    },
 });
 
 export const LandingNavigator = createStackNavigator({
@@ -57,18 +63,32 @@ export const LandingNavigator = createStackNavigator({
     initialRouteName: 'Landing',
     headerMode: 'screen'
 });
+
+
+
 export const eventsNavigator = createStackNavigator({
     Events: {
         screen: EventsScreen,
         navigationOptions: ({navigation}) => ({
-            header: null
+            //header: null,
+            headerStyle: {
+                backgroundColor: '#F44336',
+            },
+            headerTintColor:'#fff',
+            headerLeft: <View style={{margin: 5, }}><Icon name="search" color='#fff' /></View>,
+            headerRight: <View style={{ margin: 5, }}><Icon name="add" color='#fff' onPress={() => navigation.navigate('newEvent')} /></View>,
+            title: <View style={{paddingTop:5,paddingBottom:5,}}><Input placeholderTextColor="white" style={styles.headerSearch}placeholder="Zoek evenementen..." /></View>,
+            headerBackTitle: 'Back',
         }),
     },
     newEvent: {
         screen: newEventScreen,
         navigationOptions: ({ navigation }) => ( {
+            headerStyle: {
+                backgroundColor:'#F44336',
+            },
+            headerTintColor:'#fff',
             title: 'Nieuw Evenementen',
-            headerLeft: <View style={styles.view}><Icon size={28} name={'chevron-left'} onPress={() => navigation.navigate('Events')} /></View>,
         }),
     },
 });
