@@ -2,15 +2,24 @@ import React from 'react';
 import { RefreshControl} from 'react-native';
 import eventsActions from '../../store/actionCreators/event';
 import { connect } from 'react-redux';
+import {StyleSheet} from 'react-native';
+import { Icon } from 'react-native-elements';
 import {
     Container,
     View,
     Text,
     Content,
+    Input,
     Card,
     Badge,
+    Button,
+    Title,
     List,
     Spinner,
+    Left, 
+    Body, 
+    Right,
+    Header,
 } from 'native-base';
 import { Image } from 'react-native';
 
@@ -40,20 +49,32 @@ class Events extends React.Component {
     }
     render() {
         return (
-            <Content refreshControl={
-                <RefreshControl
-                    refreshing={this.state.refreshing}
-                    onRefresh={this._onRefresh.bind(this)}
-                    title="Refreshing..."
-                />
-            }>
-                <List>
-                    {this.renderListItem()}
-                </List>
-            </Content>
+                <Content refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.refreshing}
+                        onRefresh={this._onRefresh.bind(this)}
+                        title="Refreshing..."
+                    />
+                }>
+                <Header searchBar rounded style={{backgroundColor: '#F44336'}}>
+                    <Left>
+                        <Icon onPress={() => this.props.eventActions.getEventsFiltered('Beurs')} name='search' color="#FFF" style={{marginLeft: 4, marginRight: 4}} />
+                    </Left>
+                    <Body style={{flexDirection: 'row', flex: 4, marginLeft: 4}}>
+                        <Input style={{backgroundColor: '#ed7971', width: '100%', borderRadius: 10, marginTop: 4, marginBottom: 4}} placeholderTextColor="white" placeholder="Zoek evenementen..." />
+                    </Body>
+                    <Right>
+                        <Button transparent>
+                            <Icon size={36} name='add' color="#FFF" style={styles.topButton} onPress={() => navigation.navigate('newEvent')} />
+                        </Button>
+                    </Right>
+                </Header>
+                    <List>
+                        {this.renderListItem()}
+                    </List>
+                </Content>
         );
     }
-
     renderListItem = () => {
         const allEvents = this.props.eventStore.events;
 
@@ -77,6 +98,14 @@ class Events extends React.Component {
         }
     }
 }
+
+const styles = StyleSheet.create({
+    topButton:{
+        backgroundColor:'transparent',
+        marginRight:20,
+        
+    }
+});
 
 export default connect(state => ({
     eventStore: state.event
