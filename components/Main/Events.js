@@ -65,7 +65,7 @@ class Events extends React.Component {
                     </Body>
                     <Right>
                         <Button transparent>
-                            <Icon size={36} name='add' color="#FFF" style={styles.topButton} onPress={() => navigation.navigate('newEvent')} />
+                            <Icon size={36} name='add' color="#FFF" style={styles.topButton} onPress={() => this.props.navigation.navigate('newEvent')} />
                         </Button>
                     </Right>
                 </Header>
