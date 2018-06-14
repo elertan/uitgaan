@@ -21,6 +21,9 @@ import FriendsScreen from './Main/Friends';
 //Add event
 import newEventScreen from './Main/newEventScreen';
 
+//functions in title
+import shareApp from './reusable/shareApp';
+
 const styles = StyleSheet.create({
     topButton:{
         backgroundColor:'transparent',
@@ -64,7 +67,22 @@ export const LandingNavigator = createStackNavigator({
     headerMode: 'screen'
 });
 
-
+export const FriendsNavigator = createStackNavigator({
+    friends: {
+        screen: FriendsScreen,
+        navigationOptions: ({ navigation }) => ({
+            //header: null,
+            headerStyle: {
+                backgroundColor: '#17d32d',
+            },
+            headerTintColor: '#fff',
+            //headerLeft: <View style={{ margin: 5, }}><Icon name="search" color='#fff' /></View>,
+            headerRight: <View style={{ margin: 5, }}><Icon name="share" color='#fff' onPress={() => shareApp()} /></View>,
+            title: <View style={{ paddingTop: 5, paddingBottom: 5, }}><Input placeholderTextColor="white" style={styles.headerSearch} placeholder="Zoek Vrienden..." /></View>,
+            headerBackTitle: 'Back',
+        }),
+    },
+});
 
 export const eventsNavigator = createStackNavigator({
     Events: {
@@ -110,7 +128,7 @@ export const HomeNavigator = createMaterialBottomTabNavigator({
         }
     },
     Friends: {
-        screen: FriendsScreen,
+        screen: FriendsNavigator,
         navigationOptions: {
             title: 'Vrienden',
             tabBarColor: '#17d32d',
