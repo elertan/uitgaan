@@ -4,7 +4,10 @@ import {
     GET_EVENTS_SUCCESS,
     GET_EVENTS_FILTERED_ERROR,
     GET_EVENTS_FILTERED_REQUEST,
-    GET_EVENTS_FILTERED_SUCCESS
+    GET_EVENTS_FILTERED_SUCCESS,
+    POST_NEW_EVENT_REQUEST,
+    POST_NEW_EVENT_SUCCES,
+    POST_NEW_EVENT_ERROR,
 } from '../actions/event';
 import apiRequest from '../../apiRequest';
 import { AsyncStorage } from 'react-native';
@@ -50,7 +53,39 @@ const creator = (dispatch) => ({
                 error: err
             });
         });
-    }
+    },
+    newEvent: async (name, description, till, from, price, image) => {
+        dispatch({
+            type: POST_NEW_EVENT_REQUEST
+        });
+        try {
+            const response = await apiRequest.post('/events/add', {
+                name,
+                description,
+                till,
+                from,
+                price,
+                image
+            });
+            ApiResult.fromResponse(response, data => {
+                dispatch({
+                    type: POST_NEW_EVENT_SUCCES,
+                    //events
+                });
+            }, err => {
+                dispatch({
+                    type: POST_NEW_EVENT_ERROR,
+                    err
+                });
+            });
+        } catch (err) {
+            console.log(err);
+            dispatch({
+                type: POST_NEW_EVENT_ERROR,
+                err
+            });
+        }
+    },
 });
 
 export default creator;

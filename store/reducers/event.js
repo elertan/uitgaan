@@ -4,7 +4,10 @@ import {
     GET_EVENTS_REQUEST,
     GET_EVENTS_FILTERED_SUCCESS,
     GET_EVENTS_FILTERED_ERROR,
-    GET_EVENTS_FILTERED_REQUEST
+    GET_EVENTS_FILTERED_REQUEST,
+    POST_NEW_EVENT_REQUEST,
+    POST_NEW_EVENT_SUCCES,
+    POST_NEW_EVENT_ERROR,
 } from '../actions/event';
 
 const initialState = {
@@ -50,6 +53,21 @@ const reducer = (state, action) => {
         case GET_EVENTS_FILTERED_REQUEST: {
             return Object.assign({}, state, {
                 isGettingFilteredEvents: true
+            });
+        }
+        case POST_NEW_EVENT_REQUEST:{
+            return Object.assign({}, state,{
+                postedEvent : false
+            });
+        } 
+        case POST_NEW_EVENT_SUCCES:{
+            return Object.assign({}, state,{
+                postedEvents : true
+            });
+        }
+        case POST_NEW_EVENT_ERROR:{
+            return Object.assign({}, state,{
+                postEventsError: action.error,
             });
         }
         default: {
