@@ -13,7 +13,7 @@ import {
     Spinner,
     View
 } from 'native-base';
-import { StyleSheet, RefreshControl} from 'react-native';
+import { StyleSheet, RefreshControl } from 'react-native';
 import userActionCreator from '../../store/actionCreators/user';
 import {
     connect
@@ -51,6 +51,7 @@ class Friends extends React.Component {
         }
 
     }
+
     componentDidMount() {
         this.props.userActions.getAll();
     }
@@ -89,7 +90,6 @@ class Friends extends React.Component {
     render() {
         return (
             <Container>
-                <Header />
                 <Content refreshControl={
                     <RefreshControl
                         refreshing={this.state.refreshing}

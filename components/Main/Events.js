@@ -2,14 +2,24 @@ import React from 'react';
 import { RefreshControl} from 'react-native';
 import eventsActions from '../../store/actionCreators/event';
 import { connect } from 'react-redux';
+import {StyleSheet} from 'react-native';
+import { Icon } from 'react-native-elements';
 import {
     Container,
     View,
     Text,
     Content,
+    Input,
     Card,
     Badge,
+    Button,
+    Title,
     List,
+    Spinner,
+    Left, 
+    Body, 
+    Right,
+    Header,
 } from 'native-base';
 import { Image } from 'react-native';
 
@@ -39,20 +49,20 @@ class Events extends React.Component {
     }
     render() {
         return (
-            <Content refreshControl={
-                <RefreshControl
-                    refreshing={this.state.refreshing}
-                    onRefresh={this._onRefresh.bind(this)}
-                    title="Refreshing..."
-                />
-            }>
-                <List>
-                    {this.renderListItem()}
-                </List>
-            </Content>
+                <Content refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.refreshing}
+                        onRefresh={this._onRefresh.bind(this)}
+                        title="Refreshing..."
+                    />
+                }>
+
+                    <List>
+                        {this.renderListItem()}
+                    </List>
+                </Content>
         );
     }
-
     renderListItem = () => {
         const allEvents = this.props.eventStore.events;
 
@@ -72,10 +82,18 @@ class Events extends React.Component {
                 )
               })
         } else {
-            return <View><Text>Loading..</Text></View>
+            return <View><Spinner /></View>
         }
     }
 }
+
+const styles = StyleSheet.create({
+    topButton:{
+        backgroundColor:'transparent',
+        marginRight:20,
+        
+    }
+});
 
 export default connect(state => ({
     eventStore: state.event

@@ -4,7 +4,7 @@ import {
 } from 'react-navigation';
 
 import {StyleSheet} from 'react-native';
-import {Button,View} from 'native-base';
+import {Button,View,Input,Text} from 'native-base';
 import createMaterialBottomTabNavigator from 'react-navigation-material-bottom-tabs/createMaterialBottomTabNavigator';
 
 import { Icon } from 'react-native-elements';
@@ -21,6 +21,9 @@ import FriendsScreen from './Main/Friends';
 //Add event
 import newEventScreen from './Main/newEventScreen';
 
+//functions in title
+import shareApp from './reusable/shareApp';
+
 const styles = StyleSheet.create({
     topButton:{
         backgroundColor:'transparent',
@@ -31,7 +34,13 @@ const styles = StyleSheet.create({
         padding:5,
         marginRight:5,
         marginLeft: 5,
-    }
+    },
+    headerSearch:{
+        backgroundColor:'rgba(0,0,0,0.1)',
+        borderRadius:17,
+        paddingLeft:20,
+        paddingRight: 20,
+    },
 });
 
 export const LandingNavigator = createStackNavigator({
@@ -57,19 +66,47 @@ export const LandingNavigator = createStackNavigator({
     initialRouteName: 'Landing',
     headerMode: 'screen'
 });
+
+export const FriendsNavigator = createStackNavigator({
+    friends: {
+        screen: FriendsScreen,
+        navigationOptions: ({ navigation }) => ({
+            //header: null,
+            headerStyle: {
+                backgroundColor: '#17d32d',
+            },
+            headerTintColor: '#fff',
+            //headerLeft: <View style={{ margin: 5, }}><Icon name="search" color='#fff' /></View>,
+            headerRight: <View style={{ margin: 5, }}><Icon name="share" color='#fff' onPress={() => shareApp()} /></View>,
+            title: <View style={{ paddingTop: 5, paddingBottom: 5, }}><Input placeholderTextColor="white" style={styles.headerSearch} placeholder="Zoek Vrienden..." /></View>,
+            headerBackTitle: 'Back',
+        }),
+    },
+});
+
 export const eventsNavigator = createStackNavigator({
     Events: {
         screen: EventsScreen,
         navigationOptions: ({navigation}) => ({
-            title: 'Evenementen',
-            headerRight: <View style={styles.view}><Icon size={28} name='add' style={styles.topButton} onPress={() => navigation.navigate('newEvent')} /></View>,
+            //header: null,
+            headerStyle: {
+                backgroundColor: '#F44336',
+            },
+            headerTintColor:'#fff',
+            headerLeft: <View style={{margin: 5, }}><Icon name="search" color='#fff' /></View>,
+            headerRight: <View style={{ margin: 5, }}><Icon name="add" color='#fff' onPress={() => navigation.navigate('newEvent')} /></View>,
+            title: <View style={{paddingTop:5,paddingBottom:5,}}><Input placeholderTextColor="white" style={styles.headerSearch}placeholder="Zoek evenementen..." /></View>,
+            headerBackTitle: 'Back',
         }),
     },
     newEvent: {
         screen: newEventScreen,
         navigationOptions: ({ navigation }) => ( {
+            headerStyle: {
+                backgroundColor:'#F44336',
+            },
+            headerTintColor:'#fff',
             title: 'Nieuw Evenementen',
-            headerLeft: <View style={styles.view}><Icon size={28} name={'chevron-left'} onPress={() => navigation.navigate('Events')} /></View>,
         }),
     },
 });
@@ -91,7 +128,7 @@ export const HomeNavigator = createMaterialBottomTabNavigator({
         }
     },
     Friends: {
-        screen: FriendsScreen,
+        screen: FriendsNavigator,
         navigationOptions: {
             title: 'Vrienden',
             tabBarColor: '#17d32d',
