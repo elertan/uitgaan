@@ -124,7 +124,8 @@ const creator = (dispatch) => ({
             type: GET_ALL_FRIENDS
         });
         try {
-            const response = await ApiRequest.getInstance().axios.get('/friend');
+            const response = await ApiRequest.getInstance().axios.get('/friends');
+            console.log('response');
             ApiResult.fromResponse(
                 response,
                 data => dispatch({
@@ -144,7 +145,6 @@ const creator = (dispatch) => ({
         }
     },
     follow: async (username) => {
-        console.log(username);
         dispatch({
             type: FOLLOW
         });
@@ -152,8 +152,7 @@ const creator = (dispatch) => ({
             const response = await ApiRequest.getInstance().axios.post('/friends/follow', {
                 username
             });
-            console.log(response.data);
-            ApiRequest.fromResponse(
+            ApiResult.fromResponse(
                 response,
                 data => dispatch({
                     type: FOLLOW_SUCCESS,

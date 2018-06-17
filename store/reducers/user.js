@@ -12,7 +12,9 @@ import {
     GET_ALL_SUCCESS,
     GET_ALL_ERROR,
     GET_ALL_FRIENDS_SUCCESS,
-    FOLLOW_SUCCESS
+    FOLLOW_SUCCESS,
+    FOLLOW,
+    FOLLOW_ERROR
 } from '../actions/user';
 import ApiRequest from '../../apiRequest';
 
@@ -26,6 +28,7 @@ const initialState = {
     registerUserResult: undefined,
     getAllUsers: undefined,
     getAllFriends: undefined,
+    followSuccess: undefined,
 };
 
 const reducer = (state, action) => {
@@ -100,6 +103,9 @@ const reducer = (state, action) => {
             return Object.assign({}, state, {
                 followSuccess: action.user,
             });
+        }
+        case FOLLOW_ERROR: {
+            console.log(action.err);
         }
         default: {
             return state || initialState;

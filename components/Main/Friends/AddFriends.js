@@ -31,8 +31,20 @@ const styles = StyleSheet.create({
 });
 
 class AddFriends extends React.Component {
+  state = {
+    isAdding: false,
+  };
+
   componentDidMount() {
     this.props.userStoreActions.getAll();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.userStore.followSuccess !== nextProps.userStore.followSuccess) {
+      if (this.state.isAdding) { this.setState({isAdding: false}); }
+      this.props.userStoreActions.getAll();
+      this.props.userStoreActions.getAllFriends();
+    }
   }
 
   renderList = () => {
@@ -57,7 +69,7 @@ class AddFriends extends React.Component {
                 </View>
             </Body>
             <Right>
-              <Button onPress={() => this.props.userStoreActions.follow(user.username)}>
+              <Button onPress={() => this.props.userStoreActions.follow(user.username) && this.setState({isAdding:true})} disabled={this.state.isAdding}>
                 <Text>VOLG</Text>
               </Button>
             </Right>
