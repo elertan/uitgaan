@@ -13,7 +13,8 @@ import {
 import {
     Icon,
 } from 'react-native-elements';
-import ImagePicker from 'react-native-image-crop-picker';
+//import ImagePicker from 'react-native-image-crop-picker';
+import { ImagePicker, Permissions } from 'expo';
 import {
     firstname as validateFirstname,
     lastname as validateLastname
@@ -72,21 +73,38 @@ export default class Profile extends React.Component {
         }
     }
 
-    handleSelectProfileIcon = async () => {
-        const image = await ImagePicker.openPicker({
-            cropping: true,
-            cropperCircleOverlay: true,
-            cropperCancelText: 'Annuleer',
-            cropperChooseText: 'Dit wordt em!',
-            cropperToolbarTitle: 'Pak nog ff het mooiste stukje',
-            width: 250,
-            height: 250,
-            writeTempFile: false,
-            includeBase64: true
-        });
-        this.setState({ avatar: 'data:' + image.mime + ';base64,' + image.data });
-    }
+    // handleSelectProfileIcon = async () => {
+    //     const image = await ImagePicker.openPicker({
+    //         cropping: true,
+    //         cropperCircleOverlay: true,
+    //         cropperCancelText: 'Annuleer',
+    //         cropperChooseText: 'Dit wordt em!',
+    //         cropperToolbarTitle: 'Pak nog ff het mooiste stukje',
+    //         width: 250,
+    //         height: 250,
+    //         writeTempFile: false,
+    //         includeBase64: true
+    //     });
+    //     this.setState({ avatar: 'data:' + image.mime + ';base64,' + image.data });
+    // }
 
+    _pickImage = async () => {
+        Permissions.askAsync(Permissions.CAMERA_ROLL);
+        Permissions.askAsync(Permissions.CAMERA);
+        let result = await ImagePicker.launchImageLibraryAsync({
+            base64: true,
+            allowsEditing: true,
+            aspect: [4, 2],
+        });
+
+        //console.log(result);
+
+        if (!result.cancelled) {
+            var ImageLinkSplitOnDot = result.uri.split(".");
+            this.setState({ avatar: "data:image/" + ImageLinkSplitOnDot[ImageLinkSplitOnDot.length - 1] + ";base64," + result.base64 });
+            //console.log(this.state.avatar);
+        }
+    };
     mayProceed = () => {
         return this.state.avatar;
     }
@@ -105,7 +123,7 @@ export default class Profile extends React.Component {
                 <View style={styles.profileIconContainer}>
                     <View style={styles.profileIcon}>
                         <TouchableOpacity 
-                            onPress={this.handleSelectProfileIcon}
+                            onPress={this._pickImage}
                             style={styles.profileIconTouchableOpacity}
                         >
                             {this.state.avatar ?
