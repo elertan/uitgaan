@@ -42,10 +42,9 @@ const creator = (dispatch) => ({
         });
         const response = await promise;
         ApiResult.fromResponse(response, async data => {
-            const events = data;
             dispatch({
                 type: GET_EVENTS_FILTERED_SUCCESS,
-                events
+                events: data
             });
         }, err => {
             dispatch({

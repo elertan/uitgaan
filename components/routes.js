@@ -28,6 +28,8 @@ import EditeProfile from './Main/EditProfile';
 
 //functions in title
 import shareApp from './reusable/shareApp';
+import HeaderSearch from './Main/Components/HeaderSearch';
+
 
 const styles = StyleSheet.create({
     topButton:{
@@ -110,7 +112,7 @@ export const eventsNavigator = createStackNavigator({
             headerTintColor:'#fff',
             headerLeft: <View style={{margin: 5, }}><Icon name="search" color='#fff' /></View>,
             headerRight: <View style={{ margin: 5, }}><Icon name="add" color='#fff' onPress={() => navigation.navigate('newEvent')} /></View>,
-            title: <View style={{paddingTop:5,paddingBottom:5,}}><Input placeholderTextColor="white" style={styles.headerSearch}placeholder="Zoek evenementen..." /></View>,
+            title: <HeaderSearch />,
             headerBackTitle: 'Back',
         }),
     },

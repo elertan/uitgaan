@@ -39,8 +39,12 @@ const reducer = (state, action) => {
             });
         }
         case GET_EVENTS_FILTERED_SUCCESS: {
+            let events = undefined;
+            if(action.events.length > 0){
+                events = action.events;
+            }
             return Object.assign({}, state, {
-                filteredEvents: action.events,
+                filteredEvents: events,
                 isGettingFilteredEvents: false
             });
         }

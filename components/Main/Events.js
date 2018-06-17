@@ -64,7 +64,7 @@ class Events extends React.Component {
         );
     }
     renderListItem = () => {
-        const allEvents = this.props.eventStore.events;
+        const allEvents = this.props.eventStore.filteredEvents || this.props.eventStore.events;
 
         if (allEvents) {
             return allEvents.map((event) => {
