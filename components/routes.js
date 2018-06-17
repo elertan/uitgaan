@@ -78,7 +78,7 @@ export const FriendsNavigator = createStackNavigator({
                 backgroundColor: '#17d32d',
             },
             headerTintColor: '#fff',
-            //headerLeft: <View style={{ margin: 5, }}><Icon name="search" color='#fff' /></View>,
+            headerLeft: <View style={{ margin: 5, }}><Icon name="share" color='#fff' onPress={() => shareApp()}/></View>,
             headerRight:
             <View style={{ margin: 5, marginRight: 15 }}>
                 <Icon name="add" color='#fff' onPress={() => navigation.navigate('addFriends')} />
