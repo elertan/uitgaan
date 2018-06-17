@@ -71,12 +71,10 @@ class newEventScreen extends React.Component {
             aspect: [4, 2],
         });
 
-        //console.log(result);
 
         if (!result.cancelled) {
             var ImageLinkSplitOnDot = result.uri.split(".");
             this.setState({ avatar: "data:image/" + ImageLinkSplitOnDot[ImageLinkSplitOnDot.length - 1] + ";base64," + result.base64});
-            console.log(this.state.avatar);
         }
     };
 
@@ -85,7 +83,7 @@ class newEventScreen extends React.Component {
 
     async postEvent(){
         const d = this.state;
-        console.log(await this.props.eventActions.newEvent(
+        await this.props.eventActions.newEvent(
             d.name,
             d.discription,
             d.till,
@@ -93,7 +91,7 @@ class newEventScreen extends React.Component {
             d.price,
             d.image,
             d.privateEvent
-        ));
+        );
         Alert.alert('Posted');
     }
     renderImage(){
@@ -104,8 +102,6 @@ class newEventScreen extends React.Component {
     }
 
     renderDisplayPreview() {
-
-        console.log();
         return (<Card>
             {this.renderImage()}
             <View style={{ padding: 8 }}>
@@ -116,7 +112,6 @@ class newEventScreen extends React.Component {
                 <Text>€ {this.state.price}</Text>
             </Badge>
         </Card>);
-
     }
 
     getCurrentDate(){
