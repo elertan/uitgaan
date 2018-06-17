@@ -76,7 +76,7 @@ class newEventScreen extends React.Component {
         if (!result.cancelled) {
             var ImageLinkSplitOnDot = result.uri.split(".");
             this.setState({ avatar: "data:image/" + ImageLinkSplitOnDot[ImageLinkSplitOnDot.length - 1] + ";base64," + result.base64});
-            console.log(this.state.avatar);
+            //console.log(this.state.avatar);
         }
     };
 
