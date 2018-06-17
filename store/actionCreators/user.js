@@ -15,6 +15,7 @@ import {
     GET_ALL_FRIENDS_ERROR,
     GET_ALL_FRIENDS_SUCCESS,
     FOLLOW,
+    FOLLOW_SUCCESS,
     FOLLOW_ERROR
 } from '../actions/user';
 import ApiRequest from '../../apiRequest';
@@ -143,6 +144,7 @@ const creator = (dispatch) => ({
         }
     },
     follow: async (username) => {
+        console.log(username);
         dispatch({
             type: FOLLOW
         });
@@ -150,6 +152,7 @@ const creator = (dispatch) => ({
             const response = await ApiRequest.getInstance().axios.post('/friends/follow', {
                 username
             });
+            console.log(response.data);
             ApiRequest.fromResponse(
                 response,
                 data => dispatch({

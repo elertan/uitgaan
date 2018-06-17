@@ -39,7 +39,7 @@ class AddFriends extends React.Component {
     if (this.props.userStore.getAllSuccess.length === 0) {
       return (
         <View>
-          <Text>Er zijn nog geen andere gebruikers toegevoegd aan deze app</Text>
+          <Text>Je hebt iedereen gevolgd 😳</Text>
         </View>
       );
     }
@@ -48,19 +48,19 @@ class AddFriends extends React.Component {
       <List>
           {this.props.userStore.getAllSuccess.map((user, i) =>
           <ListItem avatar key={i} style={styles.listItem}>
-          <Left>
-              <Thumbnail source={{ uri: user.avatar }} />
-          </Left>
-          <Body>
-              <View>
-                  <Text>{user.firstname} {user.lastname}</Text>
-              </View>
-          </Body>
-          <Right>
-            <Button onClick={() => this.props.userStoreActions.follow(user.username)}>
-              <Text>VOLG</Text>
-            </Button>
-          </Right>
+            <Left>
+                <Thumbnail source={{ uri: user.avatar }} />
+            </Left>
+            <Body>
+                <View>
+                    <Text>{user.firstname} {user.lastname}</Text>
+                </View>
+            </Body>
+            <Right>
+              <Button onPress={() => this.props.userStoreActions.follow(user.username)}>
+                <Text>VOLG</Text>
+              </Button>
+            </Right>
           </ListItem>
           )}
       </List>
