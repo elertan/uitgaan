@@ -9,7 +9,7 @@ import {
     POST_NEW_EVENT_SUCCES,
     POST_NEW_EVENT_ERROR,
 } from '../actions/event';
-import apiRequest from '../../apiRequest';
+import ApiRequest from '../../apiRequest';
 import { AsyncStorage } from 'react-native';
 import ApiResult from '../../ApiResult';
 
@@ -18,7 +18,7 @@ const creator = (dispatch) => ({
         dispatch({
             type: GET_EVENTS_REQUEST
         });
-        const promise = apiRequest.get('/events/all');
+        const promise = ApiRequest.getInstance().axios.get('/events/all');
         const response = await promise;
         ApiResult.fromResponse(response, async data => {
             const events = data;
@@ -37,7 +37,7 @@ const creator = (dispatch) => ({
         dispatch({
             type: GET_EVENTS_FILTERED_REQUEST
         });
-        const promise = apiRequest.post('/events/filter', {
+        const promise = ApiRequest.getInstance().axios.post('/events/filter', {
             name
         });
         const response = await promise;
@@ -59,7 +59,7 @@ const creator = (dispatch) => ({
             type: POST_NEW_EVENT_REQUEST
         });
         try {
-            const response = await apiRequest.post('/events/add', {
+            const response = await ApiRequest.getInstance().axios.post('/events/add', {
                 name,
                 description,
                 till,

@@ -10,9 +10,12 @@ import {
     LOGOUT_USER_REQUEST,
     GET_ALL,
     GET_ALL_ERROR,
-    GET_ALL_SUCCESS
+    GET_ALL_SUCCESS,
+    GET_ALL_FRIENDS,
+    GET_ALL_FRIENDS_ERROR,
+    GET_ALL_FRIENDS_SUCCESS
 } from '../actions/user';
-import apiRequest from '../../apiRequest';
+import ApiRequest from '../../apiRequest';
 import { AsyncStorage } from 'react-native';
 import ApiResult from '../../ApiResult';
 
@@ -36,7 +39,7 @@ const creator = (dispatch) => ({
         dispatch({
             type: LOGIN_USER_REQUEST
         });
-        const promise = apiRequest.post('/auth/login', {
+        const promise = ApiRequest.getInstance().axios.post('/auth/login', {
             username,
             password
         });
@@ -57,6 +60,7 @@ const creator = (dispatch) => ({
     },
     logout: async () => {
         await AsyncStorage.removeItem('user');
+        ApiRequest.getInstance().removeAccessToken();
         dispatch({
             type: LOGOUT_USER_REQUEST
         });
@@ -66,7 +70,7 @@ const creator = (dispatch) => ({
             type: REGISTER_USER_REQUEST
         });
         try {
-            const response = await apiRequest.post('/auth/register', {
+            const response = await ApiRequest.getInstance().axios.post('/auth/register', {
                 username,
                 password,
                 firstname,
@@ -99,7 +103,7 @@ const creator = (dispatch) => ({
             type: GET_ALL
         });
         try {
-            const response = await apiRequest.get('/user');
+            const response = await ApiRequest.getInstance().axios.get('/user');
             ApiResult.fromResponse(
                 response,
                 data => dispatch({ type: GET_ALL_SUCCESS, users: data }),
@@ -111,7 +115,31 @@ const creator = (dispatch) => ({
                 err
             });
         }
-    }
+    },
+    getAllFriends: async () => {
+        dispatch({
+            type: GET_ALL_FRIENDS
+        });
+        try {
+            const response = await ApiRequest.getInstance().axios.get('/friends');
+            ApiResult.fromResponse(
+                response,
+                data => dispatch({
+                    type: GET_ALL_FRIENDS_SUCCESS,
+                    friends: data
+                }),
+                err => dispatch({
+                    type: GET_ALL_FRIENDS_ERROR,
+                    err
+                })
+            );
+        } catch (err) {
+            dispatch({
+                type: GET_ALL_FRIENDS_ERROR,
+                err,
+            });
+        }
+    },
 });
 
 export default creator;

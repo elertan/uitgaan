@@ -5,10 +5,36 @@ import Axios from 'axios';
 // Axios.defaults.headers.common['Accept'] = 'application/json';
 // Axios.defaults.headers.post['Content-Type'] = 'application/json';
 
+class ApiRequest {
+    axios;
+    setAccessToken = (token) => {
+        this.axios = Axios.create({
+            baseURL: 'https://uitgaan-api.herokuapp.com/api/v1/',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+    }
 
-export default Axios.create({
-    baseURL: 'https://uitgaan-api.herokuapp.com/api/v1/'
-});
+    removeAccessToken = () => {
+        this.axios = Axios.create({
+            baseURL: 'https://uitgaan-api.herokuapp.com/api/v1/',
+        });
+    }
+
+    static getInstance() {
+        if (ApiRequest._instance) {
+            return ApiRequest._instance;
+        }
+        ApiRequest._instance = new ApiRequest();
+        ApiRequest._instance.axios = Axios.create({
+            baseURL: 'https://uitgaan-api.herokuapp.com/api/v1/'
+        });
+        return ApiRequest._instance;
+    }
+}
+
+export default ApiRequest;
 
 // export default Axios.create({
 //     baseURL: 'http://localhost:3000/api/v1/'

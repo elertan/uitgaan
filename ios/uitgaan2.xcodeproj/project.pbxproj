@@ -151,7 +151,7 @@
 				TargetAttributes = {
 					B56386401DB9693800A0598C = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = AAU76W97RS;
+						DevelopmentTeam = 3N82D874QU;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -408,10 +408,10 @@
 			baseConfigurationReference = 4797A0C00A11AE11E60B2916 /* Pods-uitgaan2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = AAU76W97RS;
+				DEVELOPMENT_TEAM = 3N82D874QU;
 				INFOPLIST_FILE = "$(SRCROOT)/uitgaan2/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = nl.gavin.uitgaan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elertan.uitgaan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -422,10 +422,10 @@
 			baseConfigurationReference = 9FF38472A0B2330E39AC1FCC /* Pods-uitgaan2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = AAU76W97RS;
+				DEVELOPMENT_TEAM = 3N82D874QU;
 				INFOPLIST_FILE = "$(SRCROOT)/uitgaan2/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = nl.gavin.uitgaan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elertan.uitgaan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

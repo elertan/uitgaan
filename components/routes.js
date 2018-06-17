@@ -18,6 +18,8 @@ import RegisterScreen from './auth/Register';
 import EventsScreen from './Main/Events';
 import ProfileScreen from './Main/Profile';
 import FriendsScreen from './Main/Friends';
+
+import AddFriendsScreen from './Main/Friends/AddFriends';
 //Add event
 import newEventScreen from './Main/newEventScreen';
 
@@ -77,11 +79,20 @@ export const FriendsNavigator = createStackNavigator({
             },
             headerTintColor: '#fff',
             //headerLeft: <View style={{ margin: 5, }}><Icon name="search" color='#fff' /></View>,
-            headerRight: <View style={{ margin: 5, }}><Icon name="share" color='#fff' onPress={() => shareApp()} /></View>,
-            title: <View style={{ paddingTop: 5, paddingBottom: 5, }}><Input placeholderTextColor="white" style={styles.headerSearch} placeholder="Zoek Vrienden..." /></View>,
+            headerRight:
+            <View style={{ margin: 5, marginRight: 15 }}>
+                <Icon name="add" color='#fff' onPress={() => navigation.navigate('addFriends')} />
+            </View>,
+            title: <Text style={{ color: '#FFF', fontSize: 18 }}>Vrienden</Text>,
             headerBackTitle: 'Back',
         }),
     },
+    addFriends: {
+        screen: AddFriendsScreen,
+        navigationOptions: {
+            title: 'Voeg vrienden toe',
+        }
+    }
 });
 
 export const eventsNavigator = createStackNavigator({

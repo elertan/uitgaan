@@ -10,8 +10,10 @@ import {
     LOGOUT_USER_REQUEST,
     GET_ALL,
     GET_ALL_SUCCESS,
-    GET_ALL_ERROR
+    GET_ALL_ERROR,
+    GET_ALL_FRIENDS_SUCCESS
 } from '../actions/user';
+import ApiRequest from '../../apiRequest';
 
 const initialState = {
     hasCheckedForSavedUser: false,
@@ -21,7 +23,8 @@ const initialState = {
     isRegistering: false,
     registerError: undefined,
     registerUserResult: undefined,
-    getAllUsers: undefined
+    getAllUsers: undefined,
+    getAllFriends: undefined,
 };
 
 const reducer = (state, action) => {
@@ -43,6 +46,7 @@ const reducer = (state, action) => {
             });
         }
         case LOGIN_USER_SUCCESS: {
+            ApiRequest.getInstance().setAccessToken(action.user.accessToken);
             return Object.assign({}, state, {
                 user: action.user,
                 isLoggingIn: false,
@@ -84,6 +88,11 @@ const reducer = (state, action) => {
         case GET_ALL_ERROR: {
             return Object.assign({}, state, {
                 getAllError: action.err
+            });
+        }
+        case GET_ALL_FRIENDS_SUCCESS: {
+            return Object.assign({}, state, {
+                getAllFriends: action.friends
             });
         }
         default: {

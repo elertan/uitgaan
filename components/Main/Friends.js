@@ -40,34 +40,33 @@ class Friends extends React.Component {
     }
     _onRefresh() {
         this.setState({ refreshing: true });
-        this.props.userActions.getAll();
+        this.props.userActions.getAllFriends();
 
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.userState.getAllSuccess !== nextProps.userState.getAllSuccess) {
+        if (this.props.userState.getAllFriends !== nextProps.userState.getAllFriends) {
             this.setState({ refreshing: false });
-
         }
-
     }
 
     componentDidMount() {
-        this.props.userActions.getAll();
+        this.props.userActions.getAllFriends();
     }
 
     renderList = () => {
-        if (this.props.userState.getAllSuccess.length === 0) {
+        if (this.props.userState.getAllFriends.length === 0) {
             return (
                 <Container style={styles.noFriendsContainer}>
-                    <Text>Je bent echt een kansloos mannetje</Text>
+                    <Text>Je bent nog steeds vriendloos!</Text>
+                    <Text style={{ textAlign: 'center' }}>Je kan vrienden toevoegen door op het icoontje rechtsbovenin te drukken</Text>
                 </Container>
             );
         }
 
         return (
             <List>
-                {this.props.userState.getAllSuccess.map((user, i) =>
+                {this.props.userState.getAllFriends.map((user, i) =>
                 <ListItem avatar key={i} style={styles.listItem}>
                 <Left>
                     <Thumbnail source={{ uri: user.avatar }} />
@@ -97,7 +96,7 @@ class Friends extends React.Component {
                         title="Refreshing..."
                     />
                 }>
-                    {this.props.userState.getAllSuccess ?
+                    {this.props.userState.getAllFriends ?
                     this.renderList()
                     :
                     <Spinner />
