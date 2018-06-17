@@ -140,6 +140,7 @@ class Profile extends React.Component {
                     />
                     <SettingsList.Item 
                         title="Wijzig"
+                        onPress={() => this.props.navigation.navigate('editeProfile')}
                         icon={
                             <Icon 
                                 type="material-community"
@@ -170,7 +171,7 @@ class Profile extends React.Component {
 
     render() {
         return (
-            <View>
+            <View style={{backgroundColor:'#f6f6f6',height:'100%'}}>
                 {this.renderHeader()}
                 {this.renderSettings()}
             </View>

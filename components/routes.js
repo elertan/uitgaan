@@ -23,6 +23,9 @@ import AddFriendsScreen from './Main/Friends/AddFriends';
 //Add event
 import newEventScreen from './Main/newEventScreen';
 
+//Profile edite
+import EditeProfile from './Main/EditProfile';
+
 //functions in title
 import shareApp from './reusable/shareApp';
 
@@ -43,6 +46,7 @@ const styles = StyleSheet.create({
         paddingLeft:20,
         paddingRight: 20,
     },
+
 });
 
 export const LandingNavigator = createStackNavigator({
@@ -117,8 +121,26 @@ export const eventsNavigator = createStackNavigator({
                 backgroundColor:'#F44336',
             },
             headerTintColor:'#fff',
-            title: 'Nieuw Evenementen',
+            title: 'Nieuw Evenement',
         }),
+    },
+});
+
+export const ProfileNavigator = createStackNavigator({
+    myProfile: {
+        screen: ProfileScreen,
+        navigationOptions: {
+            header: null,
+            headerBackTitle: 'Back',
+        },
+    },
+    editeProfile: {
+        screen: EditeProfile,
+        navigationOptions: {
+            //headerTintColor: '#fff',
+            title: 'Bewerk profiel',
+            backgroundColor:"#6a51ae"
+        },
     },
 });
 export const HomeNavigator = createMaterialBottomTabNavigator({
@@ -131,7 +153,7 @@ export const HomeNavigator = createMaterialBottomTabNavigator({
         }
     },
     Profile: {
-        screen: ProfileScreen,
+        screen: ProfileNavigator,
         navigationOptions: {
             title: 'Profiel',
             tabBarColor: '#1c73ff',
