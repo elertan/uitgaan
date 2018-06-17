@@ -20,9 +20,11 @@ import {
     Right,
     Body,
     Icon,
+    Switch,
 } from 'native-base';
 import DatePicker from 'react-native-datepicker'
-import ImagePicker from 'react-native-image-crop-picker';
+import { ImagePicker, Permissions} from 'expo';
+//import ImagePicker from 'react-native-image-crop-picker';
 
 
 const styles = StyleSheet.create({
@@ -41,7 +43,7 @@ const styles = StyleSheet.create({
         borderRightWidth: 0, 
         borderBottomWidth: 1, 
         borderLeftWidth: 0, 
-        width: "100%", 
+        flex:1, 
         marginBottom: 10, 
         borderColor: '#d6d7da',
         marginHorizontal: 15
@@ -56,27 +58,30 @@ class newEventScreen extends React.Component {
         displayPreview: '',
         avatar: '',
         till: '',
+        privateEvent: true, 
         from:'',
     };
-    handleSelectProfileIcon = async () => {
-        try {
-            const image = await ImagePicker.openPicker({
-                cropping: true,
-                cropperCircleOverlay: true,
-                cropperCancelText: 'Annuleer',
-                cropperChooseText: 'Dit wordt em!',
-                cropperToolbarTitle: 'Pak nog ff het mooiste stukje',
-                width: 250,
-                height: 250,
-                writeTempFile: false,
-                includeBase64: true
-            });
-            this.setState({ avatar: 'data:' + image.mime + ';base64,' + image.data });
-        } catch (error) {
-            Alert.alert("Helaas is deze optie niet mogelijk in combinatie met expo");
-        }
 
-    }
+    _pickImage = async () => {
+        Permissions.askAsync(Permissions.CAMERA_ROLL);
+        Permissions.askAsync(Permissions.CAMERA);
+        let result = await ImagePicker.launchImageLibraryAsync({
+            base64: true,
+            allowsEditing: true,
+            aspect: [4, 2],
+        });
+
+        //console.log(result);
+
+        if (!result.cancelled) {
+            var ImageLinkSplitOnDot = result.uri.split(".");
+            this.setState({ avatar: "data:image/" + ImageLinkSplitOnDot[ImageLinkSplitOnDot.length - 1] + ";base64," + result.base64});
+            console.log(this.state.avatar);
+        }
+    };
+
+
+ 
 
     async postEvent(){
         const d = this.state;
@@ -86,7 +91,8 @@ class newEventScreen extends React.Component {
             d.till,
             d.from,
             d.price,
-            d.image
+            d.image,
+            d.privateEvent
         ));
         Alert.alert('Posted');
     }
@@ -130,11 +136,29 @@ class newEventScreen extends React.Component {
         today = mm + '-' + dd + '-' + yyyy;
         return (today);
     }
+
+    privateEventSwitch(){
+        if (this.state.privateEvent){
+            this.setState({ privateEvent: false })
+        }else{
+            this.setState({ privateEvent: true })
+        }
+    }
+
     render() {
 
         return (<Content>
             <Form>
-                <Item style={styles.formItemFirst}>
+                <ListItem style={styles.formItemFirst}>
+                    <Body>
+                        <Text>Alleen voor vrienden?</Text>
+                    </Body>
+                    <Right>
+                        <Switch value={this.state.privateEvent} onValueChange={() => this.privateEventSwitch()}/>
+                    </Right>
+                </ListItem>
+
+                <Item style={styles.formItem}>
                     <Input
                         placeholder="Event Naam"
                         value={this.state.name}
@@ -155,7 +179,7 @@ class newEventScreen extends React.Component {
                         onChangeText={text => this.setState({ discription: text })}
                     />
                 </Item>
-                <ListItem onPress={this.handleSelectProfileIcon} style={styles.formItem}>
+                <ListItem onPress={this._pickImage} style={styles.formItem}>
                     <Body>
                         <Text>Kies een plaatje</Text>
                     </Body>
@@ -163,6 +187,9 @@ class newEventScreen extends React.Component {
                         <Icon name="arrow-forward" />
                     </Right>
                 </ListItem>
+                <View style={{
+                    display: 'flex',
+                    flexDirection: 'row'}}>
                 <DatePicker
                     style={styles.datepicker}
                 date={this.state.till}
@@ -175,7 +202,7 @@ class newEventScreen extends React.Component {
                 cancelBtnText="Cancel"
         customStyles={{
                     dateIcon: {
-                        position: 'absolute',
+                        display:'none',
                         right: 20,
                         top: 4,
                         marginRight: 0
@@ -206,6 +233,7 @@ class newEventScreen extends React.Component {
                     cancelBtnText="Cancel"
                     customStyles={{
                         dateIcon: {
+                            display: 'none',
                             position: 'absolute',
                             right: 20,
                             top: 4,
@@ -225,6 +253,7 @@ class newEventScreen extends React.Component {
                     }}
                     onDateChange={(date) => { this.setState({ from: date }) }}
                 />
+                </View>
             </Form>
             <Button block danger style={{ marginHorizontal: 10, marginBottom: 10, backgroundColor: '#F44336' }} onPress={() => this.postEvent()}>
                 <Text>Plaats evenement</Text>
