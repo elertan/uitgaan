@@ -20,6 +20,7 @@ import {
     Right,
     Body,
     Icon,
+    Switch,
 } from 'native-base';
 import DatePicker from 'react-native-datepicker'
 import ImagePicker from 'react-native-image-crop-picker';
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
         borderRightWidth: 0, 
         borderBottomWidth: 1, 
         borderLeftWidth: 0, 
-        width: "100%", 
+        flex:1, 
         marginBottom: 10, 
         borderColor: '#d6d7da',
         marginHorizontal: 15
@@ -56,6 +57,7 @@ class newEventScreen extends React.Component {
         displayPreview: '',
         avatar: '',
         till: '',
+        privateEvent: true, 
         from:'',
     };
     handleSelectProfileIcon = async () => {
@@ -86,7 +88,8 @@ class newEventScreen extends React.Component {
             d.till,
             d.from,
             d.price,
-            d.image
+            d.image,
+            d.privateEvent
         ));
         Alert.alert('Posted');
     }
@@ -130,10 +133,28 @@ class newEventScreen extends React.Component {
         today = mm + '-' + dd + '-' + yyyy;
         return (today);
     }
+
+    privateEventSwitch(){
+        if (this.state.privateEvent){
+            this.setState({ privateEvent: false })
+        }else{
+            this.setState({ privateEvent: true })
+        }
+    }
+
     render() {
 
         return (<Content>
             <Form>
+                <ListItem>
+                    <Body>
+                        <Text>Alleen voor vrienden?</Text>
+                    </Body>
+                    <Right>
+                        <Switch value={this.state.privateEvent} onValueChange={() => this.privateEventSwitch()}/>
+                    </Right>
+                </ListItem>
+
                 <Item style={styles.formItemFirst}>
                     <Input
                         placeholder="Event Naam"
@@ -163,6 +184,9 @@ class newEventScreen extends React.Component {
                         <Icon name="arrow-forward" />
                     </Right>
                 </ListItem>
+                <View style={{
+                    display: 'flex',
+                    flexDirection: 'row'}}>
                 <DatePicker
                     style={styles.datepicker}
                 date={this.state.till}
@@ -175,7 +199,7 @@ class newEventScreen extends React.Component {
                 cancelBtnText="Cancel"
         customStyles={{
                     dateIcon: {
-                        position: 'absolute',
+                        display:'none',
                         right: 20,
                         top: 4,
                         marginRight: 0
@@ -206,6 +230,7 @@ class newEventScreen extends React.Component {
                     cancelBtnText="Cancel"
                     customStyles={{
                         dateIcon: {
+                            display: 'none',
                             position: 'absolute',
                             right: 20,
                             top: 4,
@@ -225,6 +250,7 @@ class newEventScreen extends React.Component {
                     }}
                     onDateChange={(date) => { this.setState({ from: date }) }}
                 />
+                </View>
             </Form>
             <Button block danger style={{ marginHorizontal: 10, marginBottom: 10, backgroundColor: '#F44336' }} onPress={() => this.postEvent()}>
                 <Text>Plaats evenement</Text>
