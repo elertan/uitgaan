@@ -13,7 +13,9 @@ import {
     GET_ALL_SUCCESS,
     GET_ALL_FRIENDS,
     GET_ALL_FRIENDS_ERROR,
-    GET_ALL_FRIENDS_SUCCESS
+    GET_ALL_FRIENDS_SUCCESS,
+    FOLLOW,
+    FOLLOW_ERROR
 } from '../actions/user';
 import ApiRequest from '../../apiRequest';
 import { AsyncStorage } from 'react-native';
@@ -121,7 +123,7 @@ const creator = (dispatch) => ({
             type: GET_ALL_FRIENDS
         });
         try {
-            const response = await ApiRequest.getInstance().axios.get('/friends');
+            const response = await ApiRequest.getInstance().axios.get('/friend');
             ApiResult.fromResponse(
                 response,
                 data => dispatch({
@@ -140,6 +142,32 @@ const creator = (dispatch) => ({
             });
         }
     },
+    follow: async (username) => {
+        dispatch({
+            type: FOLLOW
+        });
+        try {
+            const response = await ApiRequest.getInstance().axios.post('/friends/follow', {
+                username
+            });
+            ApiRequest.fromResponse(
+                response,
+                data => dispatch({
+                    type: FOLLOW_SUCCESS,
+                    user: data
+                }),
+                err => dispatch({
+                    type: FOLLOW_ERROR,
+                    err
+                })
+            );
+        } catch (err) {
+            dispatch({
+                type: FOLLOW_ERROR,
+                err
+            });
+        }
+    }
 });
 
 export default creator;

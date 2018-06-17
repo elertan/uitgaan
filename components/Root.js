@@ -15,6 +15,7 @@ import {
     HomeNavigator,
 } from './routes';
 import userActionCreator from '../store/actionCreators/user';
+import ApiRequest from '../apiRequest';
 
 class Root extends React.Component {
     componentDidMount() {
@@ -30,6 +31,10 @@ class Root extends React.Component {
                     </View>
                 </AppLoader>
             );
+        }
+
+        if (this.props.userStore.user) {
+            ApiRequest.getInstance().setAccessToken(this.props.userStore.user.accessToken);
         }
 
         return (

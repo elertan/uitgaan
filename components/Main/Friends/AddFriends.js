@@ -57,8 +57,8 @@ class AddFriends extends React.Component {
               </View>
           </Body>
           <Right>
-            <Button>
-              <Text>VOEG TOE</Text>
+            <Button onClick={() => this.props.userStoreActions.follow(user.username)}>
+              <Text>VOLG</Text>
             </Button>
           </Right>
           </ListItem>
