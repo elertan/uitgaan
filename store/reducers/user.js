@@ -11,7 +11,8 @@ import {
     GET_ALL,
     GET_ALL_SUCCESS,
     GET_ALL_ERROR,
-    GET_ALL_FRIENDS_SUCCESS
+    GET_ALL_FRIENDS_SUCCESS,
+    FOLLOW_SUCCESS
 } from '../actions/user';
 import ApiRequest from '../../apiRequest';
 
@@ -93,6 +94,11 @@ const reducer = (state, action) => {
         case GET_ALL_FRIENDS_SUCCESS: {
             return Object.assign({}, state, {
                 getAllFriends: action.friends
+            });
+        }
+        case FOLLOW_SUCCESS: {
+            return Object.assign({}, state, {
+                followSuccess: action.user,
             });
         }
         default: {

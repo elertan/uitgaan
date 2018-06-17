@@ -83,14 +83,14 @@ export const FriendsNavigator = createStackNavigator({
             <View style={{ margin: 5, marginRight: 15 }}>
                 <Icon name="add" color='#fff' onPress={() => navigation.navigate('addFriends')} />
             </View>,
-            title: <Text style={{ color: '#FFF', fontSize: 18 }}>Vrienden</Text>,
+            title: 'Wie Jij Volgt',
             headerBackTitle: 'Back',
         }),
     },
     addFriends: {
         screen: AddFriendsScreen,
         navigationOptions: {
-            title: 'Voeg vrienden toe',
+            title: 'Volg anderen',
         }
     }
 });
@@ -141,7 +141,7 @@ export const HomeNavigator = createMaterialBottomTabNavigator({
     Friends: {
         screen: FriendsNavigator,
         navigationOptions: {
-            title: 'Vrienden',
+            title: 'Wie Jij Volgt',
             tabBarColor: '#17d32d',
             tabBarIcon: (state) => <Icon name="people" color="#FFF" />
         }
