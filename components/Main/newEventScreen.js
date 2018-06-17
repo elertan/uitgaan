@@ -23,7 +23,8 @@ import {
     Switch,
 } from 'native-base';
 import DatePicker from 'react-native-datepicker'
-import ImagePicker from 'react-native-image-crop-picker';
+import { ImagePicker, Permissions} from 'expo';
+//import ImagePicker from 'react-native-image-crop-picker';
 
 
 const styles = StyleSheet.create({
@@ -60,25 +61,27 @@ class newEventScreen extends React.Component {
         privateEvent: true, 
         from:'',
     };
-    handleSelectProfileIcon = async () => {
-        try {
-            const image = await ImagePicker.openPicker({
-                cropping: true,
-                cropperCircleOverlay: true,
-                cropperCancelText: 'Annuleer',
-                cropperChooseText: 'Dit wordt em!',
-                cropperToolbarTitle: 'Pak nog ff het mooiste stukje',
-                width: 250,
-                height: 250,
-                writeTempFile: false,
-                includeBase64: true
-            });
-            this.setState({ avatar: 'data:' + image.mime + ';base64,' + image.data });
-        } catch (error) {
-            Alert.alert("Helaas is deze optie niet mogelijk in combinatie met expo");
-        }
 
-    }
+    _pickImage = async () => {
+        Permissions.askAsync(Permissions.CAMERA_ROLL);
+        Permissions.askAsync(Permissions.CAMERA);
+        let result = await ImagePicker.launchImageLibraryAsync({
+            base64: true,
+            allowsEditing: true,
+            aspect: [4, 2],
+        });
+
+        //console.log(result);
+
+        if (!result.cancelled) {
+            var ImageLinkSplitOnDot = result.uri.split(".");
+            this.setState({ avatar: "data:image/" + ImageLinkSplitOnDot[ImageLinkSplitOnDot.length - 1] + ";base64," + result.base64});
+            console.log(this.state.avatar);
+        }
+    };
+
+
+ 
 
     async postEvent(){
         const d = this.state;
@@ -146,7 +149,7 @@ class newEventScreen extends React.Component {
 
         return (<Content>
             <Form>
-                <ListItem>
+                <ListItem style={styles.formItemFirst}>
                     <Body>
                         <Text>Alleen voor vrienden?</Text>
                     </Body>
@@ -155,7 +158,7 @@ class newEventScreen extends React.Component {
                     </Right>
                 </ListItem>
 
-                <Item style={styles.formItemFirst}>
+                <Item style={styles.formItem}>
                     <Input
                         placeholder="Event Naam"
                         value={this.state.name}
@@ -176,7 +179,7 @@ class newEventScreen extends React.Component {
                         onChangeText={text => this.setState({ discription: text })}
                     />
                 </Item>
-                <ListItem onPress={this.handleSelectProfileIcon} style={styles.formItem}>
+                <ListItem onPress={this._pickImage} style={styles.formItem}>
                     <Body>
                         <Text>Kies een plaatje</Text>
                     </Body>
