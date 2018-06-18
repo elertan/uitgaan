@@ -80,16 +80,38 @@ class newEventScreen extends React.Component {
 
     async postEvent(){
         const d = this.state;
-        await this.props.eventActions.newEvent(
-            d.name,
-            d.discription,
-            d.till + "T18:25:43.511Z",
-            d.from + "T18:25:43.511Z",
-            d.price,
-            d.image
-        );
-        Alert.alert('Posted');
+        if(d.name && d.discription && d.price && d.avatar){
+            await this.props.eventActions.newEvent(
+                d.name,
+                d.discription,
+                this.getDateFix(d.till),
+                this.getDateFix(d.from),
+                (d.price * 100),
+                d.avatar,
+                d.privateEvent
+            );
+        }else{
+            Alert.alert("Vul alstublieft alle velden in.");
+        }
+
     }
+
+    getDateFix(date){
+        if(date){
+            return date + "T18:25:43.511Z";
+        }
+        return;
+    }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.eventStore.postEventsError !== this.props.eventStore.postEventsError) {
+            Alert.alert(nextProps.eventStore.postEventsError.message);
+            console.log(nextProps.eventStore.postEventsError);
+        }
+        if (nextProps.eventStore.postedEvent !== this.props.eventStore.postedEvent) {
+            this.props.navigation.pop();
+        }
+    }
+
     renderImage(){
         if(this.state.avatar){
             return (<Image style={{ width: '100%', height: 200 }} source={{ uri: this.state.avatar }} />);
@@ -124,7 +146,7 @@ class newEventScreen extends React.Component {
             mm = '0' + mm
         }
 
-        today = yyyy + "/" + mm + "/" + dd;
+        today = yyyy + "-" + mm + "-" + dd;
         return (today);
     }
 
@@ -186,9 +208,9 @@ class newEventScreen extends React.Component {
                 date={this.state.from}
                 mode="date"
                 placeholder="begin datum"
-                format="YYYY/MM/DD"
+                format="YYYY-MM-DD"
                     minDate={this.getCurrentDate()}
-                maxDate="2200/01/01"
+                maxDate="2200-01-01"
                 confirmBtnText="Confirm"
                 cancelBtnText="Cancel"
         customStyles={{
@@ -217,9 +239,9 @@ class newEventScreen extends React.Component {
                     date={this.state.till}
                     mode="date"
                     placeholder="eind datum"
-                        format="YYYY/MM/DD"
+                        format="YYYY-MM-DD"
                     minDate={this.getCurrentDate()}
-                        maxDate="2200/01/01"
+                        maxDate="2200-01-01"
                     confirmBtnText="Confirm"
                     cancelBtnText="Cancel"
                     customStyles={{
