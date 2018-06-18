@@ -97,35 +97,7 @@ class Profile extends React.Component {
                     <Text style={styles.userBioText}>{this.props.userStore.user.bio}</Text>
                 </View>
                 </View>
-                <View style={styles.socialRow}>
-                <View>
-                    <Icon
-                    size={30}
-                    type="entypo"
-                    color="#3B5A98"
-                    name="facebook-with-circle"
-                    onPress={() => console.log('facebook')}
-                    />
-                </View>
-                <View style={styles.socialIcon}>
-                    <Icon
-                    size={30}
-                    type="entypo"
-                    color="#56ACEE"
-                    name="twitter-with-circle"
-                    onPress={() => console.log('twitter')}
-                    />
-                </View>
-                <View>
-                    <Icon
-                    size={30}
-                    type="entypo"
-                    color="#DD4C39"
-                    name="google--with-circle"
-                    onPress={() => console.log('google')}
-                    />
-                </View>
-                </View>
+
             </View>
         );
     }

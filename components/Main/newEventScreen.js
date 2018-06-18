@@ -80,14 +80,14 @@ class newEventScreen extends React.Component {
 
     async postEvent(){
         const d = this.state;
-        console.log(await this.props.eventActions.newEvent(
+        await this.props.eventActions.newEvent(
             d.name,
             d.discription,
             d.till + "T18:25:43.511Z",
             d.from + "T18:25:43.511Z",
             d.price,
             d.image
-        ));
+        );
         Alert.alert('Posted');
     }
     renderImage(){
