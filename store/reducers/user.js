@@ -8,15 +8,15 @@ import {
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
     LOGOUT_USER_REQUEST,
-    GET_ALL,
     GET_ALL_SUCCESS,
     GET_ALL_ERROR,
     GET_ALL_FRIENDS_SUCCESS,
     FOLLOW_SUCCESS,
-    FOLLOW,
-    FOLLOW_ERROR
+    FOLLOW_ERROR,
+    UPDATE_PROFILE_SUCCESS
 } from '../actions/user';
 import ApiRequest from '../../apiRequest';
+import { AsyncStorage } from 'react-native';
 
 const initialState = {
     hasCheckedForSavedUser: false,
@@ -29,6 +29,7 @@ const initialState = {
     getAllUsers: undefined,
     getAllFriends: undefined,
     followSuccess: undefined,
+    updateProfileSuccess: undefined,
 };
 
 const reducer = (state, action) => {
@@ -106,6 +107,13 @@ const reducer = (state, action) => {
         }
         case FOLLOW_ERROR: {
             console.log(action.err);
+        }
+        case UPDATE_PROFILE_SUCCESS: {
+            AsyncStorage.setItem('user', JSON.stringify(action.user));
+            return Object.assign({}, state, {
+                user: action.user,
+                updateProfileSuccess: action.user
+            });
         }
         default: {
             return state || initialState;

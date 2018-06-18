@@ -16,7 +16,10 @@ import {
     GET_ALL_FRIENDS_SUCCESS,
     FOLLOW,
     FOLLOW_SUCCESS,
-    FOLLOW_ERROR
+    FOLLOW_ERROR,
+    UPDATE_PROFILE,
+    UPDATE_PROFILE_ERROR,
+    UPDATE_PROFILE_SUCCESS
 } from '../actions/user';
 import ApiRequest from '../../apiRequest';
 import { AsyncStorage } from 'react-native';
@@ -169,7 +172,31 @@ const creator = (dispatch) => ({
                 err
             });
         }
-    }
+    },
+    updateProfile: async (user) => {
+        dispatch({
+            type: UPDATE_PROFILE,
+        });
+        try {
+            const response = await ApiRequest.getInstance().axios.post('user/edit', { user });
+            ApiResult.fromResponse(
+                response,
+                data => dispatch({
+                    type: UPDATE_PROFILE_SUCCESS,
+                    user: data
+                }),
+                err => dispatch({
+                    type: UPDATE_PROFILE_ERROR,
+                    err
+                }),
+            );
+        } catch (err) {
+            dispatch({
+                type: UPDATE_PROFILE_ERROR,
+                err
+            });
+        }
+    },
 });
 
 export default creator;

@@ -44,11 +44,20 @@ const styles = StyleSheet.create({
 });
 
 class EditeProfile extends React.Component {
-    state ={
-        avatar:'',
-        name:'',
-        bio:'',
+    state = {
+        avatar: this.props.userStore.user.avatar,
+        firstname: this.props.userStore.user.firstname,
+        lastname: this.props.userStore.user.lastname,
+        bio: this.props.userStore.user.bio,
+        isLoading: false,
     };
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.userStore.updateProfileSuccess !== nextProps.userStore.updateProfileSuccess) {
+            this.setState({isLoading: false});
+            this.props.navigation.pop();
+        }
+    }
 
     _pickImage = async () => {
         Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -68,27 +77,15 @@ class EditeProfile extends React.Component {
         }
     };
 
-    renderImage(){
-        if(this.state.avatar){
-            return this.state.avatar;
-        }
-        return this.props.userStore.user.avatar;
+    handleUpdateProfile = () => {
+        this.setState({isLoading: true});
+        this.props.userActions.updateProfile({
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            bio: this.state.bio,
+            avatar: this.state.avatar
+        });
     }
-
-    renderName(){
-        if (this.state.name) {
-            return this.state.name;
-        }
-        return (this.props.userStore.user.firstname + " " + this.props.userStore.user.lastname);
-    }
-
-    renderBio(){
-        if (this.state.name) {
-            return this.state.bio;
-        }
-        return (this.props.userStore.user.bio);
-    }
-
 
     renderHeader = () => {
         return (
@@ -96,23 +93,27 @@ class EditeProfile extends React.Component {
                 <View style={{alignItems:'center'}}>
                     <Image
                         style={styles.userImage}
-                        source={{ uri: this.renderImage(),}}>
+                        source={{ uri: this.state.avatar }}>
                     </Image>
                     <Text style={styles.Shadow} onPress={this._pickImage}>EDIT</Text>
                    </View>
                 <View style={{ marginTop:120,}}>
                 <Form>
-                        <Item style={styles.marginAlignHorizontal}>
+                    <Item style={styles.marginAlignHorizontal}>
                         <Input
-                            value={this.renderName()}
-                            onChangeText={text => this.setState({ name: text })}
+                            value={this.state.firstname}
+                            onChangeText={text => this.setState({ firstname: text })}
+                        />
+                        <Input
+                            value={this.state.lastname}
+                            onChangeText={text => this.setState({ lastname: text })}
                         />
                     </Item>
                         <Item style={styles.marginAlignHorizontal}>
                             <TextField
                                 multiline
                                 label="Bio"
-                                value={this.renderBio()}
+                                value={this.state.bio}
                                 title="Vertel wat over jezelf"
                                 characterRestriction={200}
                                 inputContainerStyle={{ height: 150 ,width:'100%'}}
@@ -123,7 +124,14 @@ class EditeProfile extends React.Component {
                                 }}
                             />
                         </Item>
-                        <Button block style={styles.marginAlignHorizontal}><Text style={{color:'#fff'}}>Bewerk Profiel</Text></Button>
+                        <Button
+                            block
+                            style={styles.marginAlignHorizontal}
+                            onPress={this.handleUpdateProfile}
+                            disabled={this.state.isLoading}
+                        >
+                            <Text style={{color:'#fff'}}>Bewerk Profiel</Text>
+                        </Button>
                 </Form>
                         </View>
             </Content>
