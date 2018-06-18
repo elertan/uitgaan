@@ -78,20 +78,16 @@ class newEventScreen extends React.Component {
         }
     };
 
-
- 
-
     async postEvent(){
         const d = this.state;
-        await this.props.eventActions.newEvent(
+        console.log(await this.props.eventActions.newEvent(
             d.name,
             d.discription,
-            d.till,
-            d.from,
+            d.till + "T18:25:43.511Z",
+            d.from + "T18:25:43.511Z",
             d.price,
-            d.image,
-            d.privateEvent
-        );
+            d.image
+        ));
         Alert.alert('Posted');
     }
     renderImage(){
@@ -128,7 +124,7 @@ class newEventScreen extends React.Component {
             mm = '0' + mm
         }
 
-        today = mm + '-' + dd + '-' + yyyy;
+        today = yyyy + "/" + mm + "/" + dd;
         return (today);
     }
 
@@ -187,12 +183,12 @@ class newEventScreen extends React.Component {
                     flexDirection: 'row'}}>
                 <DatePicker
                     style={styles.datepicker}
-                date={this.state.till}
+                date={this.state.from}
                 mode="date"
                 placeholder="begin datum"
-                format="DD-MM-YYYY"
+                format="YYYY/MM/DD"
                     minDate={this.getCurrentDate()}
-                maxDate="12-12-2200"
+                maxDate="2200/01/01"
                 confirmBtnText="Confirm"
                 cancelBtnText="Cancel"
         customStyles={{
@@ -221,9 +217,9 @@ class newEventScreen extends React.Component {
                     date={this.state.till}
                     mode="date"
                     placeholder="eind datum"
-                    format="DD-MM-YYYY"
+                        format="YYYY/MM/DD"
                     minDate={this.getCurrentDate()}
-                    maxDate="12-12-2200"
+                        maxDate="2200/01/01"
                     confirmBtnText="Confirm"
                     cancelBtnText="Cancel"
                     customStyles={{
@@ -246,7 +242,7 @@ class newEventScreen extends React.Component {
                         }
                         // ... You can check the source to find the other keys.
                     }}
-                    onDateChange={(date) => { this.setState({ from: date }) }}
+                    onDateChange={(date) => { this.setState({ till : date }) }}
                 />
                 </View>
             </Form>
