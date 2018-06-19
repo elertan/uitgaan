@@ -146,7 +146,7 @@ class newEventScreen extends React.Component {
             <Form>
                 <ListItem style={styles.formItemFirst}>
                     <Body>
-                        <Text>Alleen voor vrienden?</Text>
+                        <Text>Alleen voor volgers?</Text>
                     </Body>
                     <Right>
                         <Switch value={this.state.privateEvent} onValueChange={() => this.privateEventSwitch()}/>

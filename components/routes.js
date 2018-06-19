@@ -29,6 +29,7 @@ import EditeProfile from './Main/EditProfile';
 //functions in title
 import shareApp from './reusable/shareApp';
 import HeaderSearch from './Main/Components/HeaderSearch';
+import DetailPage from './Main/Events/DetailPage';
 
 
 const styles = StyleSheet.create({
@@ -110,8 +111,7 @@ export const eventsNavigator = createStackNavigator({
                 backgroundColor: '#F44336',
             },
             headerTintColor:'#fff',
-            headerLeft: <View style={{margin: 5, }}><Icon name="search" color='#fff' /></View>,
-            headerRight: <View style={{ margin: 5, }}><Icon name="add" color='#fff' onPress={() => navigation.navigate('newEvent')} /></View>,
+            headerRight: <View style={{ margin: 5, marginRight: 15 }}><Icon name="add" color='#fff' onPress={() => navigation.navigate('newEvent')} /></View>,
             title: <HeaderSearch />,
             headerBackTitle: 'Back',
         }),
@@ -126,6 +126,12 @@ export const eventsNavigator = createStackNavigator({
             title: 'Nieuw Evenement',
         }),
     },
+    detail: {
+        screen: DetailPage,
+        navigationOptions: ({ navigation }) => ({
+           title: 'Evenement',
+        }),
+    }
 });
 
 export const ProfileNavigator = createStackNavigator({

@@ -3,25 +3,16 @@ import { RefreshControl} from 'react-native';
 import eventsActions from '../../store/actionCreators/event';
 import { connect } from 'react-redux';
 import {StyleSheet} from 'react-native';
-import { Icon } from 'react-native-elements';
 import {
-    Container,
     View,
     Text,
     Content,
-    Input,
     Card,
     Badge,
-    Button,
-    Title,
     List,
     Spinner,
-    Left, 
-    Body, 
-    Right,
-    Header,
 } from 'native-base';
-import { Image } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 
 class Events extends React.Component {
     constructor(props) {
@@ -69,15 +60,21 @@ class Events extends React.Component {
         if (allEvents) {
             return allEvents.map((event) => {
                 return (
-                    <Card key={event._id}>
-                        <Image style={{width: '100%', height: 200}} source={{uri: event.image}}/>
-                        <View style={{padding: 8}}>
-                            <Text style={{fontSize: 20, fontWeight: 'bold'}}>{event.name}</Text>
-                            <Text note>{event.description}</Text>
-                        </View>
-                        <Badge info style={{position: 'absolute', right: 0, margin: 4}}>
-                            <Text>€ {event.price / 100}</Text>
-                        </Badge>
+                    <Card 
+                        key={event._id}
+                    >
+                        <TouchableOpacity onPress={() => { 
+                            this.props.navigation.push('detail', event); 
+                        }}>
+                            <Image style={{width: '100%', height: 200}} source={{uri: event.image}}/>
+                            <View style={{padding: 8}}>
+                                <Text style={{fontSize: 20, fontWeight: 'bold'}}>{event.name}</Text>
+                                <Text note>{event.description}</Text>
+                            </View>
+                            <Badge info style={{position: 'absolute', right: 0, margin: 4}}>
+                                <Text>€ {event.price / 100}</Text>
+                            </Badge>
+                        </TouchableOpacity>
                     </Card>
                 )
               })
