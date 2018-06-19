@@ -5,6 +5,7 @@ import { Image } from 'react-native';
 class DetailPage extends React.Component {
   render() {
     const event = this.props.navigation.state.params;
+    console.log(event);
     return (
       <Container>
         <Content>
@@ -22,10 +23,10 @@ class DetailPage extends React.Component {
             {event.user ?
             <View>
             <Text style={{ fontSize: 14, marginRight: 5 }}>
-              Door USERNAME 
+              Door {event.username}
             </Text>
             <Image 
-              source={{uri: 'https://cdn.inquisitr.com/wp-content/uploads/2013/06/Big-yellow-duck-being-banned-in-China-over-Tienenman-Square-issue.jpg'}}
+              source={{uri: event.user.avatar}}
               style={{ borderRadius: 17.5, height: 35, width: 35 }}
             />
             </View>
