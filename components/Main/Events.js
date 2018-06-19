@@ -75,6 +75,9 @@ class Events extends React.Component {
                             <Text style={{fontSize: 20, fontWeight: 'bold'}}>{event.name}</Text>
                             <Text note>{event.description}</Text>
                         </View>
+                        <Badge info style={{position: 'absolute', left: 0, margin: 4}}>
+                            <Text>{event.from}</Text> - <Text>{event.till}</Text>
+                        </Badge>
                         <Badge info style={{position: 'absolute', right: 0, margin: 4}}>
                             <Text>€ {event.price / 100}</Text>
                         </Badge>
