@@ -66,6 +66,8 @@ class Events extends React.Component {
     }
     renderListItem = () => {
         const allEvents = this.props.eventStore.filteredEvents || this.props.eventStore.events;
+        const fromDate = moment(event.from).format('DD-MM-YYYY');
+        const tillDate = moment(event.till).format('DD-MM-YYYY');
 
         if (allEvents) {
             return allEvents.map((event) => {
@@ -77,7 +79,7 @@ class Events extends React.Component {
                             <Text note>{event.description}</Text>
                         </View>
                         <Badge info style={{position: 'absolute', left: 0, margin: 4}}>
-                            <Text>Van: {moment(event.from)}</Text><Text>Tot: {moment(event.till)}</Text>
+                            <Text>Van: {fromDate}</Text><Text>Tot: {tillDate}</Text>
                         </Badge>
                         <Badge info style={{position: 'absolute', right: 0, margin: 4}}>
                             <Text>€ {event.price / 100}</Text>
