@@ -4,6 +4,7 @@ import eventsActions from '../../store/actionCreators/event';
 import { connect } from 'react-redux';
 import {StyleSheet} from 'react-native';
 import { Icon } from 'react-native-elements';
+import moment from 'moment';
 import {
     Container,
     View,
@@ -76,7 +77,7 @@ class Events extends React.Component {
                             <Text note>{event.description}</Text>
                         </View>
                         <Badge info style={{position: 'absolute', left: 0, margin: 4}}>
-                            <Text>{event.from}</Text> - <Text>{event.till}</Text>
+                            <Text>Van: {moment(event.from)}</Text><Text>Tot: {moment(event.till)}</Text>
                         </Badge>
                         <Badge info style={{position: 'absolute', right: 0, margin: 4}}>
                             <Text>€ {event.price / 100}</Text>
