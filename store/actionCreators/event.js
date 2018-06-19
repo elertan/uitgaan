@@ -53,7 +53,7 @@ const creator = (dispatch) => ({
             });
         });
     },
-    newEvent: async (name, description, till, from, price, image) => {
+    newEvent: async (name, description, till, from, price, image, privateEvent) => {
         dispatch({
             type: POST_NEW_EVENT_REQUEST
         });
@@ -64,7 +64,9 @@ const creator = (dispatch) => ({
                 till,
                 from,
                 price,
-                image
+                image,
+                privateEvent
+
             });
             ApiResult.fromResponse(response, data => {
                 dispatch({
@@ -74,14 +76,14 @@ const creator = (dispatch) => ({
             }, err => {
                 dispatch({
                     type: POST_NEW_EVENT_ERROR,
-                    err
+                    error: err
                 });
             });
         } catch (err) {
             console.log(err);
             dispatch({
                 type: POST_NEW_EVENT_ERROR,
-                err
+                error:err
             });
         }
     },
