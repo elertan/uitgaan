@@ -29,7 +29,6 @@ import EditeProfile from './Main/EditProfile';
 //functions in title
 import shareApp from './reusable/shareApp';
 import HeaderSearch from './Main/Components/HeaderSearch';
-import DetailPage from './Main/Events/DetailPage';
 
 
 const styles = StyleSheet.create({
@@ -133,12 +132,6 @@ export const eventsNavigator = createStackNavigator({
             title: 'Nieuw Evenement',
         }),
     },
-    detail: {
-        screen: DetailPage,
-        navigationOptions: ({ navigation }) => ({
-           title: 'Evenement',
-        }),
-    }
 });
 
 export const ProfileNavigator = createStackNavigator({

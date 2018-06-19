@@ -3,16 +3,26 @@ import { RefreshControl} from 'react-native';
 import eventsActions from '../../store/actionCreators/event';
 import { connect } from 'react-redux';
 import {StyleSheet} from 'react-native';
+import { Icon } from 'react-native-elements';
+import moment from 'moment';
 import {
+    Container,
     View,
     Text,
     Content,
+    Input,
     Card,
     Badge,
+    Button,
+    Title,
     List,
     Spinner,
+    Left, 
+    Body, 
+    Right,
+    Header,
 } from 'native-base';
-import { Image, TouchableOpacity } from 'react-native';
+import { Image } from 'react-native';
 
 class Events extends React.Component {
     constructor(props) {
@@ -56,25 +66,29 @@ class Events extends React.Component {
     }
     renderListItem = () => {
         const allEvents = this.props.eventStore.filteredEvents || this.props.eventStore.events;
-
+        
         if (allEvents) {
             return allEvents.map((event) => {
+                const fromDate = moment(event.from).format('DD-MM-YYYY');
+                const tillDate = moment(event.till).format('DD-MM-YYYY');
                 return (
-                    <Card 
-                        key={event._id}
-                    >
-                        <TouchableOpacity onPress={() => { 
-                            this.props.navigation.push('detail', event); 
-                        }}>
-                            <Image style={{width: '100%', height: 200}} source={{uri: event.image}}/>
-                            <View style={{padding: 8}}>
-                                <Text style={{fontSize: 20, fontWeight: 'bold'}}>{event.name}</Text>
-                                <Text note>{event.description}</Text>
-                            </View>
-                            <Badge info style={{position: 'absolute', right: 0, margin: 4}}>
-                                <Text>€ {event.price / 100}</Text>
+                    <Card key={event._id}>
+                        <Image style={{width: '100%', height: 200}} source={{uri: event.image}}/>
+                        <View style={{padding: 8}}>
+                            <Text style={{fontSize: 20, fontWeight: 'bold'}}>{event.name}</Text>
+                            <Text note>{event.description}</Text>
+                        </View>
+                        <View style={{position: 'absolute', left: 0, margin: 4}}>
+                            <Badge style={{marginBottom: 4}}>
+                                <Text>Van: {fromDate}</Text>
                             </Badge>
-                        </TouchableOpacity>
+                            <Badge>
+                                <Text>Tot: {tillDate}</Text>
+                            </Badge>
+                        </View>
+                        <Badge info style={{position: 'absolute', right: 0, margin: 4}}>
+                            <Text>€ {event.price / 100}</Text>
+                        </Badge>
                     </Card>
                 )
               })
