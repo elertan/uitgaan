@@ -79,10 +79,10 @@ class Events extends React.Component {
                             <Text note>{event.description}</Text>
                         </View>
                         <View style={{position: 'absolute', left: 0, margin: 4}}>
-                            <Badge info style={{marginBottom: 4}}>
+                            <Badge style={{marginBottom: 4}}>
                                 <Text>Van: {fromDate}</Text>
                             </Badge>
-                            <Badge info>
+                            <Badge>
                                 <Text>Tot: {tillDate}</Text>
                             </Badge>
                         </View>
