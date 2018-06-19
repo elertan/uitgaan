@@ -66,11 +66,11 @@ class Events extends React.Component {
     }
     renderListItem = () => {
         const allEvents = this.props.eventStore.filteredEvents || this.props.eventStore.events;
-        const fromDate = moment(event.from).format('DD-MM-YYYY');
-        const tillDate = moment(event.till).format('DD-MM-YYYY');
-
+        
         if (allEvents) {
             return allEvents.map((event) => {
+                const fromDate = moment(event.from).format('DD-MM-YYYY');
+                const tillDate = moment(event.till).format('DD-MM-YYYY');
                 return (
                     <Card key={event._id}>
                         <Image style={{width: '100%', height: 200}} source={{uri: event.image}}/>
