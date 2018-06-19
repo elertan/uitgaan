@@ -22,7 +22,7 @@ import {
     Right,
     Header,
 } from 'native-base';
-import { Image } from 'react-native';
+import { Image, TouchableWithoutFeedback } from 'react-native';
 
 class Events extends React.Component {
     constructor(props) {
@@ -73,6 +73,8 @@ class Events extends React.Component {
                 const tillDate = moment(event.till).format('DD-MM-YYYY');
                 return (
                     <Card key={event._id}>
+                        <TouchableWithoutFeedback onPress={() => this.props.navigation.push('detail', event)}>
+                        <View>
                         <Image style={{width: '100%', height: 200}} source={{uri: event.image}}/>
                         <View style={{padding: 8}}>
                             <Text style={{fontSize: 20, fontWeight: 'bold'}}>{event.name}</Text>
@@ -89,6 +91,8 @@ class Events extends React.Component {
                         <Badge info style={{position: 'absolute', right: 0, margin: 4}}>
                             <Text>€ {event.price / 100}</Text>
                         </Badge>
+                        </View>
+                        </TouchableWithoutFeedback>
                     </Card>
                 )
               })
