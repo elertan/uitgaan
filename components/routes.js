@@ -85,10 +85,10 @@ export const FriendsNavigator = createStackNavigator({
                 backgroundColor: '#17d32d',
             },
             headerTintColor: '#fff',
-            headerLeft: <View style={{ margin: 5, }}><Icon name="share" color='#fff' onPress={() => shareApp()}/></View>,
+            headerLeft: <View style={{ margin: 5, marginLeft: 15 }}><Icon name="share" color='#fff' onPress={() => shareApp()} size={25}/></View>,
             headerRight:
             <View style={{ margin: 5, marginRight: 15 }}>
-                <Icon name="add" color='#fff' onPress={() => navigation.navigate('addFriends')} />
+                <Icon name="add" color='#fff' size={30} onPress={() => navigation.navigate('addFriends')} />
             </View>,
             title: 'Wie Jij Volgt',
             headerBackTitle: 'Back',
@@ -111,7 +111,14 @@ export const eventsNavigator = createStackNavigator({
                 backgroundColor: '#F44336',
             },
             headerTintColor:'#fff',
-            headerRight: <View style={{ margin: 5, marginRight: 15 }}><Icon name="add" color='#fff' onPress={() => navigation.navigate('newEvent')} /></View>,
+            headerRight: <View style={{ margin: 5, marginRight: 15 }}>
+                <Icon
+                    name="add"
+                    color='#fff'
+                    onPress={() => navigation.navigate('newEvent')}
+                    size={30}
+                />
+            </View>,
             title: <HeaderSearch />,
             headerBackTitle: 'Back',
         }),
