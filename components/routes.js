@@ -97,6 +97,10 @@ export const FriendsNavigator = createStackNavigator({
     addFriends: {
         screen: AddFriendsScreen,
         navigationOptions: {
+            headerStyle: {
+                backgroundColor: '#17d32d',
+            },
+            headerTintColor: '#fff',
             title: 'Volg anderen',
         }
     }
@@ -136,6 +140,10 @@ export const eventsNavigator = createStackNavigator({
     detail: {
         screen: DetailPage,
         navigationOptions: {
+            headerStyle: {
+                backgroundColor: '#F44336',
+            },
+            headerTintColor: '#fff',
             title: 'Evenement'
         }
     }

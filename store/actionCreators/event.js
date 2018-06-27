@@ -65,7 +65,7 @@ const creator = (dispatch) => ({
                 from,
                 price,
                 image,
-                privateEvent
+                privateEvent,
 
             });
             ApiResult.fromResponse(response, data => {
