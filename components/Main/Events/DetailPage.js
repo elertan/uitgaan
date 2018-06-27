@@ -1,11 +1,13 @@
 import React from 'react';
 import { Container, Content, Text, View } from 'native-base';
 import { Image } from 'react-native';
+import moment from 'moment';
 
 class DetailPage extends React.Component {
   render() {
     const event = this.props.navigation.state.params;
-    console.log(event);
+    const fromDate = moment(event.from).format('DD-MM-YYYY');
+    const tillDate = moment(event.till).format('DD-MM-YYYY');
     return (
       <Container>
         <Content>
@@ -21,7 +23,11 @@ class DetailPage extends React.Component {
             marginTop: 5
           }}>
             {event.user ?
-            <View>
+            <View style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center'
+            }}>
             <Text style={{ fontSize: 14, marginRight: 5 }}>
               Door {event.username}
             </Text>
@@ -43,8 +49,8 @@ class DetailPage extends React.Component {
             justifyContent: 'center',
             marginTop: 10
           }}>
-            <Text style={{marginRight: 10}}>Van: DATUM</Text>
-            <Text>Tot: DATUM</Text>
+            <Text style={{marginRight: 10}}>Van: {fromDate}</Text>
+            <Text>Tot: {tillDate}</Text>
           </View>
           <Text style={{
             textAlign: 'center',

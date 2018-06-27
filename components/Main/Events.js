@@ -24,6 +24,8 @@ import {
 } from 'native-base';
 import { Image, TouchableWithoutFeedback } from 'react-native';
 
+const logo = require('../../assets/images/icon.jpg');
+
 class Events extends React.Component {
     constructor(props) {
         super(props);
@@ -77,8 +79,32 @@ class Events extends React.Component {
                         <View>
                         <Image style={{width: '100%', height: 200}} source={{uri: event.image}}/>
                         <View style={{padding: 8}}>
-                            <Text style={{fontSize: 20, fontWeight: 'bold'}}>{event.name}</Text>
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                alignItems: 'center'
+                            }}>
+                                {event.user ?
+                                <Image 
+                                    source={{uri: event.user.avatar}}
+                                    style={{ borderRadius: 17.5, height: 35, width: 35 }}
+                                />
+                                :
+                                <Image 
+                                    source={logo}
+                                    style={{ borderRadius: 17.5, height: 35, width: 35 }}
+                                />
+                                }
+                                <Text style={{fontSize: 20, fontWeight: 'bold', marginLeft: 5}}>{event.name}</Text>
+                            </View>
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                alignItems: 'center'
+                            }}>
+                            <View style={{width: 40}} />
                             <Text note>{event.description}</Text>
+                            </View>
                         </View>
                         <View style={{position: 'absolute', left: 0, margin: 4}}>
                             <Badge style={{marginBottom: 4}}>
