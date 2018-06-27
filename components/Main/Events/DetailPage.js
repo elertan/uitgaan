@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Content, Text, View } from 'native-base';
+import { Container, Content, Text, View, Button } from 'native-base';
 import { Image } from 'react-native';
 import moment from 'moment';
 
@@ -58,6 +58,23 @@ class DetailPage extends React.Component {
           }}>
             {event.description}
           </Text>
+          <Button block style={{ marginHorizontal: 20 }}>
+            <Text>Ik ga hier heen</Text>
+          </Button>
+          {/* https://cdn.discordapp.com/avatars/125158974730272768/a9f7078062eede74e4b535f98bc8c81f.png?size=256 */}
+          <View style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            {event.name === 'Dennis is een lul' &&
+            <Image 
+              source={{uri: 'https://cdn.discordapp.com/avatars/125158974730272768/a9f7078062eede74e4b535f98bc8c81f.png?size=256'}}
+              style={{ borderRadius: 17.5, height: 35, width: 35, marginTop: 10 }}
+            />
+            }
+          </View>
         </Content>
       </Container>
     );
