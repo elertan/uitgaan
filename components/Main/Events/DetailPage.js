@@ -66,20 +66,31 @@ class DetailPage extends React.Component {
             <Text>I'm in!</Text>
           </Button>
           }
-          <Text style={{textAlign: 'center', width: '100%', marginTop: 10}}>Deze mensen gaan hier naartoe!</Text>
+          {event.peopleGoing && event.peopleGoing.length > 0 ?
+          <Text style={{textAlign: 'center', width: '100%', marginTop: 10}}>
+            Deze mensen gaan hier naartoe!
+          </Text>
+          :
+          <Text style={{textAlign: 'center', width: '100%', marginTop: 10}}>
+            Er gaat nog niemand naar dit evenement.
+          </Text>
+          }
+          {event.peopleGoing && event.peopleGoing.length > 0 &&
           <View style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center'
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center'
           }}>
-            {event.name === 'Dennis is een lul' &&
-            <Image 
-              source={{uri: 'https://cdn.discordapp.com/avatars/125158974730272768/a9f7078062eede74e4b535f98bc8c81f.png?size=256'}}
-              style={{ borderRadius: 17.5, height: 35, width: 35, marginTop: 10 }}
-            />
-            }
+              {event.peopleGoing.map((person, i) => 
+              <Image 
+                  key={i}
+                  source={{uri: person.avatar}}
+                  style={{ borderRadius: 17.5, height: 35, width: 35, marginTop: 10, marginHorizontal: 5 }}
+              />
+              )}
           </View>
+          }
         </Content>
       </Container>
     );
