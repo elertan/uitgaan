@@ -5,8 +5,16 @@ import {
     connect
 } from 'react-redux';
 import userActionCreator from '../../../store/actionCreators/user';
+import eventActionCreator from '../../../store/actionCreators/event';
 
 class DetailPage extends React.Component {
+  handleGoToEvent = () => {
+    const event = this.props.navigation.state.params;
+    event.peopleGoing = [...event.peopleGoing, this.props.userStore.user];
+    this.setState({});
+    this.props.eventActions.goTo(event.id);
+  };
+
   render() {
     const event = this.props.navigation.state.params;
     // const fromDate = moment(event.from).format('DD-MM-YYYY');
@@ -62,8 +70,13 @@ class DetailPage extends React.Component {
             {event.description}
           </Text>
           {event.username !== this.props.userStore.user.username &&
-          <Button block style={{ marginHorizontal: 20 }}>
-            <Text>I'm in!</Text>
+           !event.peopleGoing.find(person => person.username === this.props.userStore.user.username) ?
+          <Button block style={{ marginHorizontal: 20 }} onPressOut={this.handleGoToEvent}>
+            <Text>Count me in!</Text>
+          </Button>
+          :
+          <Button block style={{ marginHorizontal: 20 }} disabled>
+            <Text>Je gaat! Awesome!</Text>
           </Button>
           }
           {event.peopleGoing && event.peopleGoing.length > 0 ?
@@ -72,7 +85,7 @@ class DetailPage extends React.Component {
           </Text>
           :
           <Text style={{textAlign: 'center', width: '100%', marginTop: 10}}>
-            Er gaat nog niemand naar dit evenement.
+            Er gaat verder nog niemand naar dit evenement.
           </Text>
           }
           {event.peopleGoing && event.peopleGoing.length > 0 &&
@@ -98,9 +111,11 @@ class DetailPage extends React.Component {
 }
 export default connect(
     state => ({
-        userStore: state.user
+        userStore: state.user,
+        eventStore: state.event,
     }),
     dispatch => ({
-        userActions: userActionCreator(dispatch)
+        userActions: userActionCreator(dispatch),
+        eventActions: eventActionCreator(dispatch),
     })
 )(DetailPage);
