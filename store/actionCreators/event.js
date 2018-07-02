@@ -8,6 +8,8 @@ import {
     POST_NEW_EVENT_REQUEST,
     POST_NEW_EVENT_SUCCES,
     POST_NEW_EVENT_ERROR,
+    GO_TO_SUCCESS,
+    GO_TO_ERROR,
 } from '../actions/event';
 import ApiRequest from '../../apiRequest';
 import { AsyncStorage } from 'react-native';
@@ -87,6 +89,20 @@ const creator = (dispatch) => ({
             });
         }
     },
+    goTo: async (eventId) => {
+        const response = await ApiRequest.getInstance().axios.post('/events/go-to', {eventId});
+        ApiResult.fromResponse(
+            response,
+            data => dispatch({
+                type: GO_TO_SUCCESS,
+                eventId: data
+            }),
+            err => dispatch({
+                type: GO_TO_ERROR,
+                err
+            }),
+        );
+    }
 });
 
 export default creator;

@@ -1,13 +1,16 @@
 import React from 'react';
 import { Container, Content, Text, View, Button } from 'native-base';
 import { Image } from 'react-native';
-import moment from 'moment';
+import {
+    connect
+} from 'react-redux';
+import userActionCreator from '../../../store/actionCreators/user';
 
 class DetailPage extends React.Component {
   render() {
     const event = this.props.navigation.state.params;
-    const fromDate = moment(event.from).format('DD-MM-YYYY');
-    const tillDate = moment(event.till).format('DD-MM-YYYY');
+    // const fromDate = moment(event.from).format('DD-MM-YYYY');
+    // const tillDate = moment(event.till).format('DD-MM-YYYY');
     return (
       <Container>
         <Content>
@@ -22,17 +25,17 @@ class DetailPage extends React.Component {
             alignItems: 'center',
             marginTop: 5
           }}>
-            {event.user ?
+            {event.username ?
             <View style={{
               display: 'flex',
               flexDirection: 'row',
               alignItems: 'center'
             }}>
             <Text style={{ fontSize: 14, marginRight: 5 }}>
-              Door {event.username}
+              Een {event.private === 1 ? 'prive' : 'publiek'} evenement van {event.username}
             </Text>
             <Image 
-              source={{uri: event.user.avatar}}
+              source={{uri: event.avatar}}
               style={{ borderRadius: 17.5, height: 35, width: 35 }}
             />
             </View>
@@ -49,8 +52,8 @@ class DetailPage extends React.Component {
             justifyContent: 'center',
             marginTop: 10
           }}>
-            <Text style={{marginRight: 10}}>Van: {fromDate}</Text>
-            <Text>Tot: {tillDate}</Text>
+            <Text style={{marginRight: 10}}>Van: {event.fromDate}</Text>
+            <Text>Tot: {event.till}</Text>
           </View>
           <Text style={{
             textAlign: 'center',
@@ -58,10 +61,12 @@ class DetailPage extends React.Component {
           }}>
             {event.description}
           </Text>
+          {event.username !== this.props.userStore.user.username &&
           <Button block style={{ marginHorizontal: 20 }}>
-            <Text>Ik ga hier heen</Text>
+            <Text>I'm in!</Text>
           </Button>
-          {/* https://cdn.discordapp.com/avatars/125158974730272768/a9f7078062eede74e4b535f98bc8c81f.png?size=256 */}
+          }
+          <Text style={{textAlign: 'center', width: '100%', marginTop: 10}}>Deze mensen gaan hier naartoe!</Text>
           <View style={{
             display: 'flex',
             flexDirection: 'row',
@@ -80,5 +85,11 @@ class DetailPage extends React.Component {
     );
   }
 }
-
-export default DetailPage;
+export default connect(
+    state => ({
+        userStore: state.user
+    }),
+    dispatch => ({
+        userActions: userActionCreator(dispatch)
+    })
+)(DetailPage);

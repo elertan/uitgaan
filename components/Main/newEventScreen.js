@@ -98,7 +98,7 @@ class newEventScreen extends React.Component {
 
     getDateFix(date){
         if(date){
-            return date + "T18:25:43.511Z";
+            return date + "";
         }
         return;
     }

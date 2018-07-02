@@ -36,15 +36,12 @@ class Events extends React.Component {
      _onRefresh() {
         this.setState({ refreshing: true });
         this.props.eventActions.getEvents();
-        
     }
 
     componentWillReceiveProps(nextProps){
-        if(this.props.eventStore.events !== nextProps.eventStore.events){
+        if (this.props.eventStore.events !== nextProps.eventStore.events) {
             this.setState({ refreshing: false });
-            
         }
-        
     }
 
     componentDidMount() {
@@ -71,10 +68,10 @@ class Events extends React.Component {
         
         if (allEvents) {
             return allEvents.map((event) => {
-                const fromDate = moment(event.from).format('DD-MM-YYYY');
-                const tillDate = moment(event.till).format('DD-MM-YYYY');
+                // const fromDate = moment(event.from).format('DD-MM-YYYY');
+                // const tillDate = moment(event.till).format('DD-MM-YYYY');
                 return (
-                    <Card key={event._id}>
+                    <Card key={event.id}>
                         <TouchableWithoutFeedback onPress={() => this.props.navigation.push('detail', event)}>
                         <View>
                         <Image style={{width: '100%', height: 200}} source={{uri: event.image}}/>
@@ -84,9 +81,9 @@ class Events extends React.Component {
                                 flexDirection: 'row',
                                 alignItems: 'center'
                             }}>
-                                {event.user ?
+                                {event.username ?
                                 <Image 
-                                    source={{uri: event.user.avatar}}
+                                    source={{uri: event.avatar}}
                                     style={{ borderRadius: 17.5, height: 35, width: 35 }}
                                 />
                                 :
@@ -105,13 +102,29 @@ class Events extends React.Component {
                             <View style={{width: 40}} />
                             <Text note>{event.description}</Text>
                             </View>
+                            {event.peopleGoing && event.peopleGoing.length > 0 &&
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                            }}>
+                                {event.peopleGoing.map((person, i) => 
+                                <Image 
+                                    key={i}
+                                    source={{uri: person.avatar}}
+                                    style={{ borderRadius: 17.5, height: 35, width: 35, marginTop: 10, marginHorizontal: 5 }}
+                                />
+                                )}
+                            </View>
+                            }
                         </View>
                         <View style={{position: 'absolute', left: 0, margin: 4}}>
                             <Badge style={{marginBottom: 4}}>
-                                <Text>Van: {fromDate}</Text>
+                                <Text>Van: {event.fromDate}</Text>
                             </Badge>
                             <Badge>
-                                <Text>Tot: {tillDate}</Text>
+                                <Text>Tot: {event.till}</Text>
                             </Badge>
                         </View>
                         <Badge info style={{position: 'absolute', right: 0, margin: 4}}>

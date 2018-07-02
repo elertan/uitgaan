@@ -9,7 +9,7 @@ class ApiRequest {
     axios;
     setAccessToken = (token) => {
         this.axios = Axios.create({
-            baseURL: 'https://uitgaan-api.herokuapp.com/api/v1/',
+            baseURL: 'http://178.85.19.253:3000/api/v1/',
             headers: {
                 Authorization: `Bearer ${token}`,
             }
@@ -18,7 +18,7 @@ class ApiRequest {
 
     removeAccessToken = () => {
         this.axios = Axios.create({
-            baseURL: 'https://uitgaan-api.herokuapp.com/api/v1/',
+            baseURL: 'http://178.85.19.253:3000/api/v1/',
         });
     }
 
@@ -28,7 +28,7 @@ class ApiRequest {
         }
         ApiRequest._instance = new ApiRequest();
         ApiRequest._instance.axios = Axios.create({
-            baseURL: 'https://uitgaan-api.herokuapp.com/api/v1/'
+            baseURL: 'http://178.85.19.253:3000/api/v1/'
         });
         return ApiRequest._instance;
     }
