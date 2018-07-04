@@ -10,6 +10,8 @@ import {
     POST_NEW_EVENT_ERROR,
     GO_TO_SUCCESS,
     GO_TO_ERROR,
+    STOP_GO_TO_SUCCESS,
+    STOP_GO_TO_ERROR,
 } from '../actions/event';
 import ApiRequest from '../../apiRequest';
 import { AsyncStorage } from 'react-native';

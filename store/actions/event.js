@@ -14,6 +14,6 @@ export const GO_TO = 'GO_TO_EVENT';
 export const GO_TO_SUCCESS = 'GO_TO_EVENT_SUCCESS';
 export const GO_TO_ERROR = 'GO_TO_ERROR';
 
-export const STOP_GO_TO = 'STOP_GO_TO_EVENT';
-export const STOP_GO_TO_SUCCESS = 'STOP_GO_TO_EVENT_SUCCESS';
+export const STOP_GO_TO = 'STOP_GO_TO';
+export const STOP_GO_TO_SUCCESS = 'STOP_GO_TO_SUCCESS';
 export const STOP_GO_TO_ERROR = 'STOP_GO_TO_ERROR';

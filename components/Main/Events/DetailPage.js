@@ -15,10 +15,19 @@ class DetailPage extends React.Component {
     this.props.eventActions.goTo(event.id);
   };
 
+  handleStopGoToEvent = () => {
+    const event = this.props.navigation.state.params;
+    this.props.eventActions.stopGoTo(event.id);
+    for(var i = 0; i < event.peopleGoing.length; i ++) {
+      if(event.peopleGoing[i].username === this.props.userStore.user.username) {
+        event.peopleGoing.splice(i, 1);
+      }
+    }
+  };
+
   render() {
     const event = this.props.navigation.state.params;
-    // const fromDate = moment(event.from).format('DD-MM-YYYY');
-    // const tillDate = moment(event.till).format('DD-MM-YYYY');
+
     return (
       <Container>
         <Content>
@@ -75,8 +84,8 @@ class DetailPage extends React.Component {
             <Text>Count me in!</Text>
           </Button>
           :
-          <Button block style={{ marginHorizontal: 20 }} disabled>
-            <Text>Je gaat! Awesome!</Text>
+          <Button block style={{ marginHorizontal: 20 }} onPressOut={this.handleStopGoToEvent}>
+            <Text>Ik ga toch niet.. :(</Text>
           </Button>
           }
           {event.peopleGoing && event.peopleGoing.length > 0 ?
