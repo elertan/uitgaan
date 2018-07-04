@@ -10,6 +10,8 @@ import {
   POST_NEW_EVENT_ERROR,
   GO_TO_SUCCESS,
   GO_TO_ERROR,
+  STOP_GO_TO_SUCCESS,
+  STOP_GO_TO_ERROR,
 } from '../actions/event';
 
 const initialState = {
@@ -21,6 +23,8 @@ const initialState = {
   getFilteredEventsError: undefined,
   goToSuccess: undefined,
   goToError: undefined,
+  stopGoToSuccess: undefined,
+  stopGoToError: undefined,
 };
 
 const reducer = (state, action) => {
@@ -97,6 +101,18 @@ const reducer = (state, action) => {
       {
         return Object.assign({}, state, {
           goToError: action.err
+        });
+      }
+    case STOP_GO_TO_SUCCESS:
+      {
+        return Object.assign({}, state, {
+          stopGoToSuccess: action.eventId
+        });
+      }
+    case STOP_GO_TO_ERROR:
+      {
+        return Object.assign({}, state, {
+          stopGoToError: action.err
         });
       }
     default:

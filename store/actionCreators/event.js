@@ -102,6 +102,20 @@ const creator = (dispatch) => ({
                 err
             }),
         );
+    },
+    stopGoTo: async (eventId) => {
+        const response = await ApiRequest.getInstance().axios.post('/events/stop-go-to', {eventId});
+        ApiResult.fromResponse(
+            response,
+            data => dispatch({
+                type: STOP_GO_TO_SUCCESS,
+                eventId: data
+            }),
+            err => dispatch({
+                type: STOP_GO_TO_ERROR,
+                err
+            }),
+        );
     }
 });
 
