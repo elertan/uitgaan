@@ -62,13 +62,13 @@ export const LandingNavigator = createStackNavigator({
     Login: {
         screen: LoginScreen,
         navigationOptions: {
-            title: 'Log In'
+            headerTitle : 'Log In'
         }
     },
     Register: {
         screen: RegisterScreen,
         navigationOptions: {
-            title: 'Registreer'
+            headerTitle : 'Registreer'
         }
     },
 }, {
@@ -90,7 +90,7 @@ export const FriendsNavigator = createStackNavigator({
             <View style={{ margin: 5, marginRight: 15 }}>
                 <Icon name="add" color='#fff' size={30} onPress={() => navigation.navigate('addFriends')} />
             </View>,
-            title: 'Wie Jij Volgt',
+            headerTitle : 'Wie Jij Volgt',
             headerBackTitle: 'Back',
         }),
     },
@@ -101,7 +101,7 @@ export const FriendsNavigator = createStackNavigator({
                 backgroundColor: '#17d32d',
             },
             headerTintColor: '#fff',
-            title: 'Volg anderen',
+            headerTitle : 'Volg anderen',
         }
     }
 });
@@ -123,7 +123,7 @@ export const eventsNavigator = createStackNavigator({
                     size={30}
                 />
             </View>,
-            title: <HeaderSearch />,
+            headerTitle : <HeaderSearch />,
             headerBackTitle: 'Back',
         }),
     },
@@ -134,7 +134,7 @@ export const eventsNavigator = createStackNavigator({
                 backgroundColor:'#F44336',
             },
             headerTintColor:'#fff',
-            title: 'Nieuw Evenement',
+            headerTitle : 'Nieuw Evenement',
         }),
     },
     detail: {
@@ -144,7 +144,7 @@ export const eventsNavigator = createStackNavigator({
                 backgroundColor: '#F44336',
             },
             headerTintColor: '#fff',
-            title: 'Evenement'
+            headerTitle : 'Evenement'
         }
     }
 });
@@ -161,7 +161,7 @@ export const ProfileNavigator = createStackNavigator({
         screen: EditeProfile,
         navigationOptions: {
             //headerTintColor: '#fff',
-            title: 'Bewerk profiel',
+            headerTitle : 'Bewerk profiel',
             backgroundColor:"#6a51ae"
         },
     },
@@ -170,7 +170,7 @@ export const HomeNavigator = createMaterialBottomTabNavigator({
     Events: {
         screen: eventsNavigator,
         navigationOptions: {
-            title: 'Evenementen',
+            headerTitle : 'Evenementen',
             tabBarColor: '#F44336',
             tabBarIcon: (state) => <Icon name="event" color="#FFF" />
         }
@@ -178,7 +178,7 @@ export const HomeNavigator = createMaterialBottomTabNavigator({
     Profile: {
         screen: ProfileNavigator,
         navigationOptions: {
-            title: 'Profiel',
+            headerTitle : 'Profiel',
             tabBarColor: '#1c73ff',
             tabBarIcon: (state) => <Icon name="person" color="#FFF" />
         }
@@ -186,7 +186,7 @@ export const HomeNavigator = createMaterialBottomTabNavigator({
     Friends: {
         screen: FriendsNavigator,
         navigationOptions: {
-            title: 'Wie Jij Volgt',
+            headerTitle : 'Wie Jij Volgt',
             tabBarColor: '#17d32d',
             tabBarIcon: (state) => <Icon name="people" color="#FFF" />
         }
