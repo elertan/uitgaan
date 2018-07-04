@@ -40,7 +40,7 @@ class DetailPage extends React.Component {
               alignItems: 'center'
             }}>
             <Text style={{ fontSize: 14, marginRight: 5 }}>
-              Een {event.private === 1 ? 'prive' : 'publiek'} evenement van {event.username}
+              Een {event.private.data[0] === 1 ? 'prive' : 'publiek'} evenement van {event.username}
             </Text>
             <Image 
               source={{uri: event.avatar}}
