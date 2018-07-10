@@ -84,9 +84,12 @@ class DetailPage extends React.Component {
             <Text>Count me in!</Text>
           </Button>
           :
+          event.username !== this.props.userStore.user.username ?
           <Button block style={{ marginHorizontal: 20 }} onPressOut={this.handleStopGoToEvent}>
             <Text>Ik ga toch niet.. :(</Text>
           </Button>
+          :
+          <View />
           }
           {event.peopleGoing && event.peopleGoing.length > 0 ?
           <Text style={{textAlign: 'center', width: '100%', marginTop: 10}}>
